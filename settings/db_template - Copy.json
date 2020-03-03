@@ -1,0 +1,23 @@
+{
+	"_Settings": {
+		"main_path": ""
+	},
+	"Template": {
+		"id": -1,
+		"anidb_name": "Name",
+		"name": "Name",
+		"path": "",
+		"anidb_description": "No Description here",
+		"description": "",
+		"anidb_score": 10,
+		"score": 10,
+		"image": "Genius.png",
+		"date": "03.10.2002",
+		"episodes": 0,
+		"anidb_tags": [],
+		"tags_user": [],
+		"tags_hidden": [],
+		"related": {},
+		"staff": {}
+	}
+}

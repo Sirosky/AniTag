@@ -1,0 +1,26 @@
+[iPhone Landscape]
+
+iPhone2G/3G/3GS_Landscape="480x320"
+iPhone4/4S_Landscape="960x640"
+iPhone5/5S/5C/SE_Landscape="1136x640"
+iPhone6/6S/7/8_Landscape="1334x750"
+iPhone6+/6S+/7+/8+_Landscape="2208x1242"
+iPhoneX/XS_Landscape="2436x1125"
+iPhoneXR_Landscape="1792x828"
+iPhoneXSMax_Landscape="2688x1242"
+
+
+[iPhone Portrait]
+
+iPhone2G/3G/3GS_Portrait="320x480"
+iPhone4/4S_Portrait="640x960"
+iPhone5/5S/5C/SE_Portrait="640x1136"
+iPhone6/6S/7/8_Portrait="750x1334"
+iPhone6+/6S+/7+/8+_Portrait="1242x2208"
+iPhoneX/XS_Portrait="1125x2436"
+iPhoneXR_Portrait="828x1792"
+iPhoneXSMax_Portrait="1242x2688"
+
+
+
+

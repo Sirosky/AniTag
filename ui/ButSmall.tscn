@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/themes/default/ThemeButRounded.tres" type="Theme" id=1]
+[ext_resource path="res://ui/themes/default/icons/folder.png" type="Texture" id=2]
+
+
+[node name="Button" type="Button"]
+margin_left = 896.0
+margin_right = 932.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 32, 32 )
+hint_tooltip = "Tooltip"
+size_flags_vertical = 0
+theme = ExtResource( 1 )
+icon = ExtResource( 2 )

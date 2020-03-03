@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/themes/default/ThemeButSquare.tres" type="Theme" id=1]
+[ext_resource path="res://ui/themes/default/LL16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/ButFile.gd" type="Script" id=3]
+
+[node name="ButFile" type="Button"]
+margin_right = 958.0
+margin_bottom = 28.0
+size_flags_horizontal = 13
+size_flags_vertical = 13
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Text"
+script = ExtResource( 3 )

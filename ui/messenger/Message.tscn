@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/themes/default/ThemePanelRounded.tres" type="Theme" id=1]
+[ext_resource path="res://ui/themes/default/LL18.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/messenger/Message.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.109804, 0.219608, 0.419608, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.6, 0.6, 0.6, 0 )
+
+[node name="Message" type="PanelContainer"]
+margin_left = 1502.0
+margin_top = 922.0
+margin_right = 1902.0
+margin_bottom = 972.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_vertical = 5
+theme = ExtResource( 1 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 400.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 15
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 400.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 8
+custom_constants/margin_top = 8
+custom_constants/margin_left = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer/MarginContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 392.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+scroll_active = false
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer"]
+margin_top = 42.0
+margin_right = 400.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 3
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+percent_visible = false

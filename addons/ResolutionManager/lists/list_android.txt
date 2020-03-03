@@ -1,0 +1,13 @@
+[Android]
+
+WSVGA_Landscape="1024x600"
+WSVGA_Portrait="600x1024"
+WVGA_Landscape="800x480"
+WVGA_Portrait="480x800"
+WXGA_Landscape="1280x800"
+WXGA_Portrait="800x1280"
+FWVGA_Landscape="854x480"
+FWVGA_Portrait="480x854"
+HVGA_Landscape="480x320"
+HVGA_Portrait="320x480"
+

@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Reference",
+"class": "FileSearch",
+"language": "GDScript",
+"path": "res://utility/file_search.gd"
+}, {
+"base": "Container",
+"class": "SpillContainer",
+"language": "GDScript",
+"path": "res://utility/SpillContainer.gd"
+} ]
+_global_script_class_icons={
+"FileSearch": "",
+"SpillContainer": ""
+}
+
+[application]
+
+config/name="AniTag"
+config/description="open source anime media manager"
+run/main_scene="res://Main.tscn"
+boot_splash/image="res://ui/themes/logo_splash.png"
+boot_splash/fullsize=false
+boot_splash/bg_color=Color( 0.0392157, 0.121569, 0.2, 1 )
+config/icon="res://icon.png"
+
+[autoload]
+
+global="*res://engine/global.tscn"
+resolution_manager="*res://ui/resolution_manager.gd"
+
+[display]
+
+window/size/width=1920
+window/size/height=1080
+window/size/fullscreen=true
+window/dpi/allow_hidpi=true
+
+[memory]
+
+limits/message_queue/max_size_kb=2048
+
+[rendering]
+
+environment/default_clear_color=Color( 0.168627, 0.168627, 0.168627, 1 )
+environment/default_environment="res://default_env.tres"

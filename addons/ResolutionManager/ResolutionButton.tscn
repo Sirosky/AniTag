@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/ResolutionManager/icons/iconfinder_desktop_3688496.png" type="Texture" id=1]
+[ext_resource path="res://addons/ResolutionManager/ResolutionButton.gd" type="Script" id=2]
+
+[node name="ResolutionButton" type="MenuButton"]
+margin_right = 12.0
+margin_bottom = 20.0
+text = "Resolution"
+icon = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[connection signal="about_to_show" from="BaseResWindow" to="BaseResWindow" method="_on_BaseResWindow_about_to_show"]

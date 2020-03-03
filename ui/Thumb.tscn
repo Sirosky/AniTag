@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/Thumb.gd" type="Script" id=1]
+
+[node name="Thumb" type="TextureRect"]
+margin_right = 225.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 192, 108 )
+expand = true
+stretch_mode = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

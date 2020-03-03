@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/themes/default/LL16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/InfoLabel.gd" type="Script" id=2]
+
+[node name="InfoLabel" type="Label"]
+margin_right = 476.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Sequel"
+script = ExtResource( 2 )

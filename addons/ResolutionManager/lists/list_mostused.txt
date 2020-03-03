@@ -1,0 +1,13 @@
+[Most Used]
+
+SVGA_4:3="800x600"
+XGA_4:3="1024x768"
+FHD_16:9="1920x1080"
+iPad5th/Pro9.7_Landscape="2048x1536"
+iPadPro10.5_Landscape="2224x1668"
+iPadPro12.9/2017_Landscape="2732x2048"
+iPhone6+/6S+/7+/8+_Portrait="1242x2208"
+iPhoneX/XS_Portrait="1125x2436"
+iPhoneXSMax_Portrait="1242x2688"
+WSVGA_Portrait="600x1024"
+WXGA_Landscape="1280x800"

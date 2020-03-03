@@ -1,0 +1,983 @@
+[gd_scene load_steps=48 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://ui/themes/default/bg.png" type="Texture" id=2]
+[ext_resource path="res://engine/LibraryLoader.gd" type="Script" id=3]
+[ext_resource path="res://engine/LibraryUpdater.gd" type="Script" id=4]
+[ext_resource path="res://engine/HTTPR.gd" type="Script" id=5]
+[ext_resource path="res://engine/LibraryBuilder.gd" type="Script" id=6]
+[ext_resource path="res://engine/LibraryThumb.gd" type="Script" id=7]
+[ext_resource path="res://ui/TopBar.gd" type="Script" id=8]
+[ext_resource path="res://ui/ButTopBar.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/themes/default/icons/new.png" type="Texture" id=10]
+[ext_resource path="res://ui/themes/default/icons/random.png" type="Texture" id=11]
+[ext_resource path="res://ui/themes/default/icons/bulk_thumb.png" type="Texture" id=12]
+[ext_resource path="res://ui/themes/default/icons/bulk_update.png" type="Texture" id=13]
+[ext_resource path="res://ui/themes/default/ThemeButShow.tres" type="Theme" id=14]
+[ext_resource path="res://ui/ViewListItem.gd" type="Script" id=15]
+[ext_resource path="res://ui/ItemDisplay.gd" type="Script" id=16]
+[ext_resource path="res://ui/themes/default/cover.png" type="Texture" id=17]
+[ext_resource path="res://ui/themes/default/LL100.tres" type="DynamicFont" id=18]
+[ext_resource path="res://ui/themes/default/LL16.tres" type="DynamicFont" id=19]
+[ext_resource path="res://ui/themes/default/LL36.tres" type="DynamicFont" id=20]
+[ext_resource path="res://ui/themes/default/ThemeButStatus.tres" type="Theme" id=21]
+[ext_resource path="res://ui/ButSmall.tscn" type="PackedScene" id=22]
+[ext_resource path="res://ui/themes/default/icons/database.png" type="Texture" id=23]
+[ext_resource path="res://ui/themes/default/icons/update.png" type="Texture" id=24]
+[ext_resource path="res://ui/themes/default/icons/link.png" type="Texture" id=25]
+[ext_resource path="res://ui/themes/default/icons/thumb.png" type="Texture" id=26]
+[ext_resource path="res://ui/themes/default/icons/info.png" type="Texture" id=27]
+[ext_resource path="res://ui/TagsCon.gd" type="Script" id=28]
+[ext_resource path="res://ui/themes/default/Default.tres" type="Theme" id=29]
+[ext_resource path="res://engine/FileDialog.gd" type="Script" id=30]
+[ext_resource path="res://ui/themes/default/ThemeButRounded.tres" type="Theme" id=31]
+[ext_resource path="res://ui/EditPanel.gd" type="Script" id=32]
+[ext_resource path="res://ui/themes/default/icons/filter.png" type="Texture" id=33]
+[ext_resource path="res://ui/Popups.gd" type="Script" id=34]
+[ext_resource path="res://ui/themes/default/icons/refresh.png" type="Texture" id=35]
+[ext_resource path="res://ui/themes/default/ThemeButFilter.tres" type="Theme" id=36]
+[ext_resource path="res://ui/TagPanel.gd" type="Script" id=37]
+[ext_resource path="res://ui/ImagePanel.gd" type="Script" id=38]
+[ext_resource path="res://ui/PopPanel.gd" type="Script" id=39]
+[ext_resource path="res://ui/messenger/Messenger.gd" type="Script" id=40]
+[ext_resource path="res://ui/themes/default/LL12.tres" type="DynamicFont" id=41]
+[ext_resource path="res://ui/themes/default/icons/trash.png" type="Texture" id=42]
+[ext_resource path="res://ui/themes/default/LL.tres" type="DynamicFont" id=43]
+[ext_resource path="res://ui/themes/default/ThemePanelRounded.tres" type="Theme" id=44]
+[ext_resource path="res://ui/ConfirmPanel.gd" type="Script" id=45]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.0235294, 0.14902, 0.541176 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color( 0, 0, 0, 0.12549 )
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 6.10352e-05
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Library" type="Node" parent="."]
+
+[node name="LibraryLoader" type="Node" parent="Library"]
+script = ExtResource( 3 )
+
+[node name="LibraryUpdater" type="Node" parent="Library"]
+script = ExtResource( 4 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Library/LibraryUpdater"]
+script = ExtResource( 5 )
+
+[node name="LibraryBuilder" type="Node" parent="Library"]
+script = ExtResource( 6 )
+
+[node name="LibraryThumb" type="Node" parent="Library"]
+script = ExtResource( 7 )
+
+[node name="LibraryScanner" type="Node" parent="Library"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer"]
+margin_right = 380.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 280, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+custom_styles/panel = SubResource( 1 )
+
+[node name="LeftDisplay" type="VBoxContainer" parent="HBoxContainer/Panel"]
+margin_right = 380.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+
+[node name="TopBar" type="PanelContainer" parent="HBoxContainer/Panel/LeftDisplay"]
+margin_right = 380.0
+margin_bottom = 41.0
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 8 )
+
+[node name="TopBarHBox" type="HBoxContainer" parent="HBoxContainer/Panel/LeftDisplay/TopBar"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 376.0
+margin_bottom = 37.0
+
+[node name="ButLoad" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+
+[node name="ButBuild" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 40.0
+margin_right = 76.0
+icon = ExtResource( 10 )
+
+[node name="ButRefresh" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 80.0
+margin_right = 116.0
+icon = ExtResource( 35 )
+
+[node name="ButRandom" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 120.0
+margin_right = 156.0
+icon = ExtResource( 11 )
+
+[node name="ButBulkThumb" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 160.0
+margin_right = 196.0
+icon = ExtResource( 12 )
+
+[node name="ButBulkUpdate" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 200.0
+margin_right = 236.0
+icon = ExtResource( 13 )
+
+[node name="HBoxFilter" type="HBoxContainer" parent="HBoxContainer/Panel/LeftDisplay"]
+margin_top = 45.0
+margin_right = 380.0
+margin_bottom = 78.0
+
+[node name="LineSearch" type="LineEdit" parent="HBoxContainer/Panel/LeftDisplay/HBoxFilter"]
+margin_right = 340.0
+margin_bottom = 33.0
+size_flags_horizontal = 3
+theme = ExtResource( 14 )
+placeholder_text = "Search"
+caret_blink = true
+
+[node name="ButFilter" parent="HBoxContainer/Panel/LeftDisplay/HBoxFilter" instance=ExtResource( 9 )]
+margin_left = 344.0
+margin_right = 380.0
+theme = ExtResource( 36 )
+icon = ExtResource( 33 )
+
+[node name="ViewListItem" type="ScrollContainer" parent="HBoxContainer/Panel/LeftDisplay"]
+margin_top = 82.0
+margin_right = 380.0
+margin_bottom = 1080.0
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.25
+script = ExtResource( 15 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/LeftDisplay/ViewListItem"]
+margin_right = 380.0
+margin_bottom = 998.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
+
+[node name="ItemDisplay" type="ScrollContainer" parent="HBoxContainer"]
+margin_left = 396.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.8
+script = ExtResource( 16 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ItemDisplay"]
+margin_right = 1524.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+custom_constants/separation = 0
+
+[node name="Padding" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_bottom = 16.0
+rect_min_size = Vector2( 0, 16 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TopHBox" type="HBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 16.0
+margin_right = 1524.0
+margin_bottom = 339.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+custom_constants/separation = 16
+
+[node name="Cover" type="TextureRect" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox"]
+margin_right = 240.0
+margin_bottom = 323.0
+rect_min_size = Vector2( 240, 0 )
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox"]
+margin_left = 256.0
+margin_right = 1472.0
+margin_bottom = 323.0
+size_flags_horizontal = 3
+custom_constants/separation = -2
+
+[node name="Title" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer"]
+margin_right = 1216.0
+margin_bottom = 121.0
+rect_min_size = Vector2( 600, 0 )
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 18 )
+text = "Title"
+clip_text = true
+
+[node name="InfoHBox" type="HBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer"]
+margin_top = 119.0
+margin_right = 1216.0
+margin_bottom = 175.0
+custom_constants/separation = 12
+
+[node name="AnidbScore" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+margin_right = 79.0
+margin_bottom = 56.0
+custom_constants/separation = -8
+
+[node name="ScoreLabel" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/AnidbScore"]
+margin_right = 79.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 19 )
+text = "anidb score"
+valign = 1
+
+[node name="ScoreInt" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/AnidbScore"]
+margin_top = 12.0
+margin_right = 79.0
+margin_bottom = 56.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 20 )
+text = "0"
+align = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+margin_left = 91.0
+margin_right = 95.0
+margin_bottom = 56.0
+
+[node name="MyScore" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+visible = false
+margin_left = 107.0
+margin_right = 178.0
+margin_bottom = 56.0
+custom_constants/separation = -8
+
+[node name="MyScoreLabel" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/MyScore"]
+margin_right = 71.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 19 )
+text = "my score"
+align = 1
+valign = 2
+
+[node name="MyScoreInt" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/MyScore"]
+margin_top = 12.0
+margin_right = 71.0
+margin_bottom = 56.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 20 )
+text = "0.00"
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+visible = false
+margin_left = 107.0
+margin_right = 111.0
+margin_bottom = 56.0
+
+[node name="Episodes" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+margin_left = 107.0
+margin_right = 168.0
+margin_bottom = 56.0
+custom_constants/separation = -8
+
+[node name="EpLabel" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/Episodes"]
+margin_right = 61.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 19 )
+text = "episodes"
+align = 1
+valign = 2
+
+[node name="EpInt" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/Episodes"]
+margin_top = 12.0
+margin_right = 61.0
+margin_bottom = 56.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 20 )
+text = "0"
+align = 1
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+margin_left = 180.0
+margin_right = 184.0
+margin_bottom = 56.0
+
+[node name="Status" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+visible = false
+margin_left = 297.0
+margin_right = 443.0
+margin_bottom = 64.0
+custom_constants/separation = -8
+
+[node name="StatusLabel" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/Status"]
+margin_right = 146.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 19 )
+text = "status"
+align = 1
+valign = 2
+
+[node name="StatusBut" type="Button" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/Status"]
+margin_top = 12.0
+margin_right = 146.0
+margin_bottom = 64.0
+theme = ExtResource( 21 )
+custom_fonts/font = ExtResource( 20 )
+text = "planning"
+
+[node name="VSeparator4" type="VSeparator" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+visible = false
+margin_left = 297.0
+margin_right = 301.0
+margin_bottom = 56.0
+
+[node name="AirDate" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox"]
+margin_left = 196.0
+margin_right = 248.0
+margin_bottom = 56.0
+custom_constants/separation = -8
+
+[node name="AirLabel" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/AirDate"]
+margin_right = 52.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 19 )
+text = "air date"
+align = 1
+valign = 2
+
+[node name="AirInt" type="Label" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/InfoHBox/AirDate"]
+margin_top = 12.0
+margin_right = 52.0
+margin_bottom = 56.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 20 )
+text = "0"
+align = 1
+
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer"]
+self_modulate = Color( 0, 0, 0, 0.470588 )
+margin_top = 173.0
+margin_right = 1216.0
+margin_bottom = 323.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/Panel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1209.0
+margin_bottom = 143.0
+size_flags_horizontal = 3
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Description" type="RichTextLabel" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/VBoxContainer/Panel/MarginContainer"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1198.0
+margin_bottom = 132.0
+grow_horizontal = 0
+grow_vertical = 0
+rect_min_size = Vector2( 0, 128 )
+focus_mode = 2
+size_flags_horizontal = 3
+custom_fonts/mono_font = ExtResource( 19 )
+custom_fonts/normal_font = ExtResource( 19 )
+bbcode_enabled = true
+bbcode_text = "Description here."
+text = "Description here."
+selection_enabled = true
+
+[node name="ConfigVBox" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox"]
+margin_left = 1488.0
+margin_right = 1524.0
+margin_bottom = 323.0
+
+[node name="ButDir" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_right = 36.0
+
+[node name="ButDB" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 37.0
+margin_right = 36.0
+margin_bottom = 70.0
+icon = ExtResource( 23 )
+
+[node name="ButUpdate" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 74.0
+margin_right = 36.0
+margin_bottom = 107.0
+icon = ExtResource( 24 )
+
+[node name="ButLink" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 111.0
+margin_right = 36.0
+margin_bottom = 144.0
+icon = ExtResource( 25 )
+
+[node name="ButThumb" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 148.0
+margin_right = 36.0
+margin_bottom = 181.0
+icon = ExtResource( 26 )
+
+[node name="ButEdit" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 185.0
+margin_right = 36.0
+margin_bottom = 218.0
+icon = ExtResource( 27 )
+
+[node name="ButDelete" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 222.0
+margin_right = 36.0
+margin_bottom = 255.0
+icon = ExtResource( 42 )
+
+[node name="Padding2" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 339.0
+margin_bottom = 347.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TagsCon" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+visible = false
+margin_top = 355.0
+margin_right = 984.0
+margin_bottom = 379.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+script = ExtResource( 28 )
+
+[node name="Padding3" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 347.0
+margin_bottom = 355.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="FilesPanel" type="PanelContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.470588 )
+margin_top = 355.0
+margin_right = 1524.0
+margin_bottom = 369.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FilesVBox" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/FilesPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1517.0
+margin_bottom = 7.0
+script = ExtResource( 28 )
+
+[node name="Padding4" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 355.0
+margin_bottom = 363.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ThumbsCon" type="GridContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 363.0
+margin_right = 1524.0
+margin_bottom = 363.0
+columns = 4
+
+[node name="ThumbsConAlt" type="VBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+visible = false
+margin_top = 363.0
+margin_right = 1524.0
+margin_bottom = 395.0
+rect_min_size = Vector2( 0, 32 )
+script = ExtResource( 28 )
+
+[node name="Padding5" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 363.0
+margin_bottom = 371.0
+rect_min_size = Vector2( 0, 8 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="InfoBox" type="HBoxContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
+margin_top = 371.0
+margin_right = 1524.0
+margin_bottom = 385.0
+
+[node name="PanelLeft" type="PanelContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/InfoBox"]
+self_modulate = Color( 0, 0, 0, 0.470588 )
+margin_right = 760.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="RelatedGrid" type="GridContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/InfoBox/PanelLeft"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 753.0
+margin_bottom = 7.0
+
+[node name="PanelRight" type="PanelContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/InfoBox"]
+self_modulate = Color( 0, 0, 0, 0.470588 )
+margin_left = 764.0
+margin_right = 1524.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="StaffGrid" type="GridContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer/InfoBox/PanelRight"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 753.0
+margin_bottom = 7.0
+
+[node name="Popups" type="CenterContainer" parent="."]
+visible = false
+margin_left = -9.7113
+margin_top = 1.67017
+margin_right = 1910.29
+margin_bottom = 1081.67
+rect_min_size = Vector2( 1280, 720 )
+mouse_filter = 1
+script = ExtResource( 34 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PopPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 953.0
+margin_top = 532.0
+margin_right = 967.0
+margin_bottom = 546.0
+size_flags_horizontal = 13
+size_flags_vertical = 13
+script = ExtResource( 39 )
+
+[node name="PopText" type="HBoxContainer" parent="Popups/PopPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 263.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 256, 64 )
+
+[node name="LineEdit" type="LineEdit" parent="Popups/PopPanel/PopText"]
+margin_right = 211.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="ButAccept" type="Button" parent="Popups/PopPanel/PopText"]
+margin_left = 215.0
+margin_right = 256.0
+margin_bottom = 64.0
+theme = ExtResource( 31 )
+text = "OK"
+
+[node name="EditPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 953.0
+margin_top = 532.0
+margin_right = 967.0
+margin_bottom = 546.0
+script = ExtResource( 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/EditPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 448.0
+margin_bottom = 366.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="Popups/EditPanel/VBoxContainer"]
+margin_right = 441.0
+margin_bottom = 322.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="Label" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_right = 181.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Displayed Name"
+
+[node name="LineName" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_right = 441.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="Label4" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 37.0
+margin_right = 181.0
+margin_bottom = 70.0
+theme = ExtResource( 31 )
+text = "AniDB Name"
+
+[node name="LineAniDBName" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 37.0
+margin_right = 441.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="Control" type="Control" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 74.0
+margin_right = 181.0
+margin_bottom = 107.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButSearch" type="Button" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 74.0
+margin_right = 441.0
+margin_bottom = 107.0
+theme = ExtResource( 31 )
+text = "Search Name"
+
+[node name="Label2" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 111.0
+margin_right = 181.0
+margin_bottom = 144.0
+theme = ExtResource( 31 )
+text = "AniDB ID"
+
+[node name="LineID" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 111.0
+margin_right = 441.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="Control2" type="Control" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 148.0
+margin_right = 181.0
+margin_bottom = 181.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButSearchID" type="Button" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 148.0
+margin_right = 441.0
+margin_bottom = 181.0
+theme = ExtResource( 31 )
+text = "Search ID"
+
+[node name="Label3" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 185.0
+margin_right = 181.0
+margin_bottom = 218.0
+theme = ExtResource( 31 )
+text = "Path"
+
+[node name="LinePath" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 185.0
+margin_right = 441.0
+margin_bottom = 218.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="Label5" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 255.0
+margin_right = 181.0
+margin_bottom = 288.0
+theme = ExtResource( 31 )
+text = "Custom Description"
+
+[node name="TextDesc" type="TextEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 222.0
+margin_right = 441.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 41 )
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxBut" type="HBoxContainer" parent="Popups/EditPanel/VBoxContainer"]
+margin_top = 326.0
+margin_right = 441.0
+margin_bottom = 359.0
+size_flags_vertical = 2
+alignment = 2
+
+[node name="ButAccept" type="Button" parent="Popups/EditPanel/VBoxContainer/HBoxBut"]
+margin_left = 235.0
+margin_right = 366.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Save Changes"
+
+[node name="ButCancel" type="Button" parent="Popups/EditPanel/VBoxContainer/HBoxBut"]
+margin_left = 370.0
+margin_right = 441.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
+
+[node name="TagPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 953.0
+margin_top = 532.0
+margin_right = 967.0
+margin_bottom = 546.0
+size_flags_horizontal = 13
+size_flags_vertical = 13
+script = ExtResource( 37 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/TagPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 350.0
+margin_bottom = 159.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LabelFilter" type="Label" parent="Popups/TagPanel/VBoxContainer"]
+margin_right = 343.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Currently filtered tags"
+
+[node name="GridFilter" type="GridContainer" parent="Popups/TagPanel/VBoxContainer"]
+margin_top = 37.0
+margin_right = 343.0
+margin_bottom = 37.0
+columns = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popups/TagPanel/VBoxContainer"]
+margin_top = 41.0
+margin_right = 343.0
+margin_bottom = 74.0
+
+[node name="LineTag" type="LineEdit" parent="Popups/TagPanel/VBoxContainer/HBoxContainer"]
+margin_right = 256.0
+margin_bottom = 33.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="ButTagAdd" type="Button" parent="Popups/TagPanel/VBoxContainer/HBoxContainer"]
+margin_left = 260.0
+margin_right = 343.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Add Tag"
+
+[node name="LabelTop" type="Label" parent="Popups/TagPanel/VBoxContainer"]
+margin_top = 78.0
+margin_right = 343.0
+margin_bottom = 111.0
+theme = ExtResource( 31 )
+text = "Top tags in your library"
+
+[node name="GridTop" type="GridContainer" parent="Popups/TagPanel/VBoxContainer"]
+margin_top = 115.0
+margin_right = 343.0
+margin_bottom = 115.0
+columns = 4
+
+[node name="HBoxBut" type="HBoxContainer" parent="Popups/TagPanel/VBoxContainer"]
+margin_top = 119.0
+margin_right = 343.0
+margin_bottom = 152.0
+size_flags_vertical = 2
+alignment = 2
+
+[node name="ButCancel" type="Button" parent="Popups/TagPanel/VBoxContainer/HBoxBut"]
+visible = false
+margin_left = 449.0
+margin_right = 520.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
+
+[node name="ButAccept" type="Button" parent="Popups/TagPanel/VBoxContainer/HBoxBut"]
+margin_left = 272.0
+margin_right = 343.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Accept"
+
+[node name="LoadPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 760.0
+margin_top = 523.0
+margin_right = 1160.0
+margin_bottom = 555.0
+rect_min_size = Vector2( 400, 32 )
+theme = ExtResource( 44 )
+
+[node name="LoadStatus" type="Label" parent="Popups/LoadPanel"]
+margin_right = 400.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 19 )
+text = "Loading..."
+align = 1
+valign = 1
+clip_text = true
+
+[node name="ImagePanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 953.0
+margin_top = 532.0
+margin_right = 967.0
+margin_bottom = 546.0
+script = ExtResource( 38 )
+
+[node name="ThumbLarge" type="TextureRect" parent="Popups/ImagePanel"]
+visible = false
+margin_left = 354.0
+margin_top = 169.0
+margin_right = 594.0
+margin_bottom = 289.0
+rect_min_size = Vector2( 240, 120 )
+mouse_filter = 2
+expand = true
+
+[node name="ConfirmPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 840.0
+margin_top = 494.0
+margin_right = 1080.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 240, 90 )
+script = ExtResource( 45 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/ConfirmPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 233.0
+margin_bottom = 83.0
+custom_constants/separation = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Popups/ConfirmPanel/VBoxContainer"]
+margin_right = 226.0
+margin_bottom = 35.0
+custom_constants/margin_right = 4
+custom_constants/margin_top = 4
+custom_constants/margin_left = 4
+custom_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="Popups/ConfirmPanel/VBoxContainer/MarginContainer"]
+margin_left = 4.0
+margin_top = 5.0
+margin_right = 222.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 43 )
+text = "Are you sure?"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popups/ConfirmPanel/VBoxContainer"]
+margin_top = 39.0
+margin_right = 226.0
+margin_bottom = 72.0
+alignment = 1
+
+[node name="ButConfirm" type="Button" parent="Popups/ConfirmPanel/VBoxContainer/HBoxContainer"]
+margin_left = 55.0
+margin_right = 96.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "OK"
+
+[node name="ButCancel" type="Button" parent="Popups/ConfirmPanel/VBoxContainer/HBoxContainer"]
+margin_left = 100.0
+margin_right = 171.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
+
+[node name="FileDialog" type="FileDialog" parent="Popups"]
+margin_left = 660.0
+margin_top = 339.0
+margin_right = 1260.0
+margin_bottom = 739.0
+rect_min_size = Vector2( 600, 400 )
+theme = ExtResource( 29 )
+window_title = "Open a Directory"
+mode = 2
+access = 2
+show_hidden_files = true
+current_dir = "D:/Sirosky/Drive/OneDrive/Godot/AniTag"
+current_path = "D:/Sirosky/Drive/OneDrive/Godot/AniTag/"
+script = ExtResource( 30 )
+
+[node name="Messenger" type="Node" parent="."]
+script = ExtResource( 40 )
+
+[node name="Tween" type="Tween" parent="."]

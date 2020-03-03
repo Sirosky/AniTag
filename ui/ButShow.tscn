@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/themes/default/ThemeButShow.tres" type="Theme" id=1]
+[ext_resource path="res://ui/themes/default/LL18.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/ButShow.gd" type="Script" id=3]
+
+[sub_resource type="ButtonGroup" id=1]
+resource_name = "ViewList"
+
+[node name="ButShow" type="Button"]
+margin_right = 515.0
+margin_bottom = 20.0
+theme = ExtResource( 1 )
+custom_fonts/font = ExtResource( 2 )
+group = SubResource( 1 )
+text = "Test"
+align = 0
+script = ExtResource( 3 )
