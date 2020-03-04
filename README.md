@@ -2,7 +2,13 @@
 
 ## Purpose
 
-AniTag serves as a simple, lightweight local anime media manager with an emphasis on... well tagging. Video files can be accessed and played by your default video player. Unlike programs like Kodi, it is not meant to be a fully-featured media manager/ player.
+AniTag serves as a simple, lightweight local anime media manager with an emphasis on... well tags. Unlike programs like Kodi, it is not meant to be a fully-featured media manager/ player.
+
+## Download
+
+Grab the latest version [here](https://github.com/Sirosky/AniTag/releases).
+
+**Disclaimers:** While AniTag is mostly feature complete, the program is still in early stages of development. Expect crashes and random bugs. AniTag works best on a 1080p screen since its sole developer only has access to a 1080p monitor.
 
 ## Primary Features
 
@@ -10,6 +16,8 @@ AniTag serves as a simple, lightweight local anime media manager with an emphasi
 - Integration with AniDB API
 - Generate thumbnails for each library entry using FFMPEG
 - A nice user interface that isn't built on Windows UI API
+- Launch episodes for playback through your default media player
+- Don't know what to watch? Have AniTag randomly pick a show for you!
 - And of course, tag and manage the tags of each library entry
 
 ## Some Pics!
@@ -22,16 +30,11 @@ AniTag serves as a simple, lightweight local anime media manager with an emphasi
 
 AniTag is built on [Godot game engine](https://godotengine.org/). It's a rather unorthodox usage of Godot but hey, the results are pretty neat. Had to write a custom XML parser because Godot natively can't really deal with XML files. Also, turns out that Godot can pass commands to 7zip and ffmpeg. The more you know.
 
-## Download
-
-Grab the latest version here.
-
-**Disclaimers:** While AniTag is mostly feature complete, the program is still in early stages of development. Expect crashes and random bugs. AniTag works best on a 1080p screen since its sole developer only has access to a 1080p monitor.
-
 ## Credits
 
 - [u/willnationsdev](https://reddit.com/user/willnationsdev) for providing invaluable assistance throughout the six months of development. Helped me overcome several crucial stages in the development of AniTag.
 - [u/whietfegeet](https://old.reddit.com/user/whietfegeet) AKA Fatorias AKA Apple for alpha testing and severing as impromptu QA.
+- FFMPEG & 7Zip for their wonderful software
 
 ## Quick Start Guide
 
