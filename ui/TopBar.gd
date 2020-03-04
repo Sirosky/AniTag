@@ -76,7 +76,7 @@ func _on_ButRandom_pressed():
 		randomize()
 		
 		var ran = round(rand_range(0,global.db.size()-2)) #it's -2 because of _Settings
-		global.Mes.message_send("Rolled " + str(ran))
+		global.Mes.message_send("Rolled " + str(ran+1) + " out of " + str(global.db.size()-1))
 		var keys = global.db.keys()
 		var key_index = keys[ran]
 		ViewListItem.but_index[ran].emit_signal("pressed") #Load the first selection
