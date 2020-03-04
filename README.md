@@ -17,6 +17,7 @@ Grab the latest version [here](https://github.com/Sirosky/AniTag/releases).
 - Generate thumbnails for each library entry using FFMPEG
 - A nice user interface that isn't built on Windows UI API
 - Launch episodes for playback through your default media player
+- Don't know what to watch? Have AniTag randomly pick a show for you!
 - And of course, tag and manage the tags of each library entry
 
 ## Some Pics!
