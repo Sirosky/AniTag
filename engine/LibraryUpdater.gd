@@ -155,7 +155,6 @@ func anidb_decompress(ani_id): #Called only after anidb_access_api has downloade
 	if file_temp.file_exists("user://db/anidb/"+str(ani_id)+".tmp"):
 		lib_update_stage = 2
 		OS.execute(zip_path, ["e", str(out_path)+str(ani_id)+".tmp", "-y", "-o"+str(out_path)], 0)
-		#OS.execute("D:/Sirosky/Google Drive/Godot/AniTag/db/anidb/7za.exe", ["e", "D:/Sirosky/Google Drive/Godot/AniTag/db/anidb/239", "-y", "-oD:/Sirosky/Google Drive/Godot/AniTag/db/anidb/"], 0)
 		global.load_status = str("Decompressing XML DB")
 		ani_id_check = ani_id
 		timer = 30
@@ -623,7 +622,7 @@ func anidb_refresh_cover(ani_id):
 	#Refreshes current selected anime's cover image displayed based on local files
 	lib_update_stage = 8 #This is the last step
 	var file_temp = File.new() #Verify file rename succeeded
-	var image_path = "user://db/anidb/"+str(ani_id)+"/cover.jpg"#"D:/Sirosky/Desktop/IMG_20190101_093832.jpg"
+	var image_path = "user://db/anidb/"+str(ani_id)+"/cover.jpg"
 	var import_path = "user://db/anidb/"+str(ani_id)+"/cover.jpg.import"
 	Cover.texture = load("res://ui/themes/default/cover.png")
 	

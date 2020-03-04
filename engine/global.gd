@@ -1,7 +1,7 @@
 extends Node
 
 
-var dir_path = "D:/Sirosky/Watching/H"
+var dir_path = ""
 var window_width:int = ProjectSettings.get("display/window/size/width")
 var window_height:int = ProjectSettings.get("display/window/size/height")
 var screen_size = OS.get_screen_size()
