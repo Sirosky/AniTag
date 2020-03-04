@@ -2,7 +2,7 @@
 
 ## Purpose
 
-AniTag serves as a simple, lightweight local anime media manager with an emphasis on... well tagging. Video files can be accessed and played by your default video player. Unlike programs like Kodi, it is not meant to be a fully-featured media manager/ player.
+AniTag serves as a simple, lightweight local anime media manager with an emphasis on... well tags. Unlike programs like Kodi, it is not meant to be a fully-featured media manager/ player.
 
 ## Primary Features
 
@@ -10,6 +10,7 @@ AniTag serves as a simple, lightweight local anime media manager with an emphasi
 - Integration with AniDB API
 - Generate thumbnails for each library entry using FFMPEG
 - A nice user interface that isn't built on Windows UI API
+- Launch episodes for playback through your default media player
 - And of course, tag and manage the tags of each library entry
 
 ## Some Pics!
@@ -32,6 +33,7 @@ Grab the latest version here.
 
 - [u/willnationsdev](https://reddit.com/user/willnationsdev) for providing invaluable assistance throughout the six months of development. Helped me overcome several crucial stages in the development of AniTag.
 - [u/whietfegeet](https://old.reddit.com/user/whietfegeet) AKA Fatorias AKA Apple for alpha testing and severing as impromptu QA.
+- FFMPEG & 7Zip for their wonderful software
 
 ## Quick Start Guide
 
