@@ -75,11 +75,17 @@ func _on_ButRandom_pressed():
 	if global.db.size() > 0:
 		randomize()
 		
-		var ran = round(rand_range(0,global.db.size()-2)) #it's -2 because of _Settings
-		global.Mes.message_send("Rolled " + str(ran+1) + " out of " + str(global.db.size()-1))
-		var keys = global.db.keys()
-		var key_index = keys[ran]
-		ViewListItem.but_index[ran].emit_signal("pressed") #Load the first selection
+		var filter_size = ViewListItem.but_index_filtered.size()
+		if filter_size > 0: #Only randomize from filtered
+			var ran = round(rand_range(0,filter_size-1))
+			global.Mes.message_send("Rolled " + str(ran+1) + " out of " + str(filter_size))
+			ViewListItem.but_index_filtered[ran].emit_signal("pressed")
+		else: #No filter applied
+			var ran = round(rand_range(0,global.db.size()-2)) #it's -2 because of _Settings
+			global.Mes.message_send("Rolled " + str(ran+1) + " out of " + str(global.db.size()-1))
+			var keys = global.db.keys()
+			var key_index = keys[ran]
+			ViewListItem.but_index[ran].emit_signal("pressed") #Load the first selection
 		#OS.shell_open(global.db[key_index]["path"])
 	
 func _on_ButAccept_pressed(): #Open dialog to select new directory

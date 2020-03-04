@@ -121,6 +121,11 @@ func directory_filter():
 					
 			if matches < TagPanel.filtered_tags.size():
 				i.visible = 0
+	# Update but_index_filtered
+	but_index_filtered = []
+	for i in but_index:
+		if i.visible == true:
+			but_index_filtered.append(i)
 
 func _process(delta):
 	#Workaround to make sure button is always in toggled state when selected once
