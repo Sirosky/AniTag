@@ -1,4 +1,4 @@
-![](https://files.catbox.moe/3r6dxn.png)
+![Logo](https://files.catbox.moe/725vg8.png)
 
 ## Purpose
 
@@ -45,8 +45,10 @@ Grab the latest version here.
 6. Some entries will still have the (!) symbol. Those entries will have to be manually added using the ![](https://files.catbox.moe/8mq5n3.png) icon on the far right. This button allows you to edit the metadata of the entry.
 7.  From the metadata editing display, you can enter the AniDB name, hit 'Search Name' and get the AniDB ID of the show from the URL of the show. For example, 91 Days' AniDB page is found at https://anidb.net/anime/12014. Thus, 12014 is its AniDB ID. Input that ID into the AniDB ID section and hit 'Save Changes.'
    1. ![](https://files.catbox.moe/zaur9r.png)
-8. Click the ![](https://files.catbox.moe/wj3ywn.png) button on the far right and the entry will be properly updated if the correct AniDB entry was inputted.
-9. Optional: You can then hit the ![](https://files.catbox.moe/h10z8x.png)button on the top left to generate thumbnails for the entire library. Warning- this will take a while!
+8. Click the 'Update metadata from AniDB' button on the far right and the entry will be properly updated if the correct AniDB entry was inputted.
+   1. ![](https://files.catbox.moe/zwfeci.png)
+9. Optional: You can then hit the 'Bulk generate thumbnails button on the top left to generate thumbnails for the entire library. Warning- this will take a while!
+   1. ![](https://files.catbox.moe/n3m7nw.png)
 
 ## Full Guide
 
