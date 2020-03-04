@@ -13,14 +13,14 @@ func _ready():
 	#How to use FFMPEG
 	var ffmepg_path = ProjectSettings.globalize_path("res://db/thumbs/ffmpeg.exe")
 	var output_path = ProjectSettings.globalize_path("res://db/thumbs/")
-	var tar_path = 'D:/Sirosky/Sample.mkv'
+	var tar_path = 'D:/Sample.mkv'
 	
 	OS.execute(ffmepg_path, ["-i",tar_path,"-vf","fps=1/300",str(output_path+"thumb%04d.jpg"),"-hide_banner"], 0)
 	
 	#Load image from outside resources
 	
 	var image = Image.new()
-	var err = image.load("D:/Sirosky/Watching/H/[I] MB/Waver/thumb0003.jpg")
+	var err = image.load("thumb0003.jpg")
 	
 	var texture = ImageTexture.new()
 	texture.create_from_image(image,7)
