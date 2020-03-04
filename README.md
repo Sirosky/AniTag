@@ -4,6 +4,12 @@
 
 AniTag serves as a simple, lightweight local anime media manager with an emphasis on... well tags. Unlike programs like Kodi, it is not meant to be a fully-featured media manager/ player.
 
+## Download
+
+Grab the latest version [here](https://github.com/Sirosky/AniTag/releases).
+
+**Disclaimers:** While AniTag is mostly feature complete, the program is still in early stages of development. Expect crashes and random bugs. AniTag works best on a 1080p screen since its sole developer only has access to a 1080p monitor.
+
 ## Primary Features
 
 - Display and access local anime in one centralized location
@@ -22,12 +28,6 @@ AniTag serves as a simple, lightweight local anime media manager with an emphasi
 ## Under the Hood
 
 AniTag is built on [Godot game engine](https://godotengine.org/). It's a rather unorthodox usage of Godot but hey, the results are pretty neat. Had to write a custom XML parser because Godot natively can't really deal with XML files. Also, turns out that Godot can pass commands to 7zip and ffmpeg. The more you know.
-
-## Download
-
-Grab the latest version here.
-
-**Disclaimers:** While AniTag is mostly feature complete, the program is still in early stages of development. Expect crashes and random bugs. AniTag works best on a 1080p screen since its sole developer only has access to a 1080p monitor.
 
 ## Credits
 
