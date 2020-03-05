@@ -1,9 +1,9 @@
 extends Node
 
-
+var anitag_version: float = 1.1
 var dir_path = ""
-var window_width:int = ProjectSettings.get("display/window/size/width")
-var window_height:int = ProjectSettings.get("display/window/size/height")
+var window_width: int = ProjectSettings.get("display/window/size/width")
+var window_height: int = ProjectSettings.get("display/window/size/height")
 var screen_size = OS.get_screen_size()
 
 var ani_selected #String of show selected

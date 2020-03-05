@@ -24,6 +24,14 @@ func library_load():
 		
 		#Update old saves if needed
 		var needs_update = 0
+		
+		if global.db["_Settings"].has("version") == false: #Update version
+			global.db["_Settings"]["version"] = global.anitag_version
+			needs_update = 1
+		elif float(global.db["_Settings"].has("version")) != global.anitag_version:
+			global.db["_Settings"]["version"] = global.anitag_version
+			needs_update = 1	
+		
 		for i in global.db: 
 			if global.db[i].has("tags_user") == false and i != "_Settings":
 				global.db[i]["tags_user"] = []
