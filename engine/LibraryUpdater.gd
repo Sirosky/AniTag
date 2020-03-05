@@ -122,6 +122,7 @@ func anidb_init(tar_show): #Use this method to start a new search
 			Popups.visible = 0
 			global.load_status_prepend = ""
 			global.load_status = ""
+			global.Mes.message_send("Title not found. Please input AniDB ID manually.")
 		print("Null AniDB ID")
 		return
 	elif ani_id >= 0:
