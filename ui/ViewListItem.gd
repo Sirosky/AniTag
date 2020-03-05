@@ -96,36 +96,44 @@ func directory_filter():
 	but_index_filtered = []
 	
 	#Filter by title
+	
 	for i in but_index:
-		var pos = i.text.findn(text)
-		
-		if text != "": #Make sure something is actually entered
+		if text != "":
+			var pos = i.text.findn(text)
+			
 			if pos == -1: #Button didn't have the text we searched
 				i.visible = 0
 			else:
 				i.visible = 1
 				but_index_filtered.append(i)
-		else:
+		if text == "": #nothing in search bar
 			i.visible = 1
 			but_index_filtered.append(i)
-	
-	#Filter by tags
+
+	#Filter by tags CONTINUE HERE
 	if TagPanel.filtered_tags.size() > 0:
-		for i in but_index_filtered:
+		var arr
+		var temp_index = [] #Merged with but_index_filtered
+		
+		if but_index_filtered.size() > 0: #Assign correct array to loop through
+			arr = but_index_filtered
+		else:
+			arr = but_index
+		
+		for i in arr:
 			var matches = 0
 			
 			for ii in TagPanel.filtered_tags:
-				if global.db[i.stored_str]["anidb_tags"].has(ii):
+				if global.db[i.stored_str]["anidb_tags"].has(ii): #Make sure it has ALL tags
 					matches += 1
-					print(ii)
 					
 			if matches < TagPanel.filtered_tags.size():
 				i.visible = 0
-	# Update but_index_filtered
-	but_index_filtered = []
-	for i in but_index:
-		if i.visible == true:
-			but_index_filtered.append(i)
+			else:
+				temp_index.append(i)
+		
+		but_index_filtered = temp_index
+
 
 func _process(delta):
 	#Workaround to make sure button is always in toggled state when selected once
