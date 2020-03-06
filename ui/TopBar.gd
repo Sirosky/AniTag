@@ -8,6 +8,7 @@ onready var ButRefresh = get_node("TopBarHBox/ButRefresh")
 onready var ButRandom = get_node("TopBarHBox/ButRandom")
 onready var ButBulkThumb = get_node("TopBarHBox/ButBulkThumb")
 onready var ButBulkUpdate = get_node("TopBarHBox/ButBulkUpdate")
+onready var ButMore = get_node("TopBarHBox/ButMore")
 onready var ButFilter = get_node("../HBoxFilter/ButFilter")
 
 onready var FileDiag = get_node("/root/Main/Popups/FileDialog") 
@@ -15,11 +16,15 @@ onready var LibBuilder = get_node("../../../../Library/LibraryBuilder")
 onready var LibLoader = get_node("../../../../Library/LibraryLoader")
 onready var LibThumb = get_node("../../../../Library/LibraryThumb")
 onready var LibUpdater = get_node("../../../../Library/LibraryUpdater")
+onready var LibManager = get_node("/root/Main/Library/LibraryManager")
 
 onready var Popups = get_node("/root/Main/Popups") 
 onready var PopPanel = get_node("../../../../Popups/PopPanel")
 onready var PopText = get_node("../../../../Popups/PopPanel/PopText")
-onready var PopTag = get_node("/root/Main/Popups/TagPanel") 
+onready var PopTag = get_node("/root/Main/Popups/TagPanel")
+onready var ConfirmPanel = get_node("/root/Main/Popups/ConfirmPanel")
+onready var ButConfirm = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButConfirm")
+onready var ButCancel = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButCancel")
 onready var ButAccept = get_node("../../../../Popups/PopPanel/PopText/ButAccept")
 onready var TextEd = get_node("../../../../Popups/PopPanel/PopText/LineEdit")
 
@@ -47,10 +52,17 @@ func _ready():
 	ButFilter.connect("pressed",self,"_on_ButFilter_pressed")
 	ButFilter.hint_tooltip = "Apply filter based on tags"
 	
+	ButMore.connect("pressed",self,"_on_ButMore_pressed")
+	ButMore.hint_tooltip = "More tools"
+	
 	ButAccept.connect("pressed",self,"_on_ButAccept_pressed")
 	
 	FileDiag.connect("confirmed",self,"_on_confirmed")
 	FileDiag.connect("file_selected",self,"_on_file_selected")
+	
+	#For confirm panel
+	ButConfirm.connect("pressed",self,"_on_ButConfirm_pressed")
+	ButCancel.connect("pressed",self,"_on_ButCancel_pressed")
 
 
 func _on_ButLoad_pressed():
@@ -109,6 +121,24 @@ func _on_ButBulkThumb_pressed():
 	
 func _on_ButBulkUpdate_pressed():
 	LibUpdater.bulk_update()
+
+func _on_ButMore_pressed():
+	Popups.visible = 1
+	ConfirmPanel.visible = 1
+	ConfirmPanel.mode = 2
+	ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This renames a number of directories according to their AniDB name."
+
+func _on_ButConfirm_pressed():
+	if ConfirmPanel.mode == 2:
+		LibManager.dir_rename_bulk()
+		ConfirmPanel.mode = 0
+		
+	Popups.visible = 0
+	ConfirmPanel.visible = 0
+
+func _on_ButCancel_pressed():
+	Popups.visible = 0
+	ConfirmPanel.visible = 0
 
 func _on_confirmed():
 	

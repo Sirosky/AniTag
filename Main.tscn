@@ -632,6 +632,7 @@ theme = ExtResource( 31 )
 text = "OK"
 
 [node name="EditPanel" type="PanelContainer" parent="Popups"]
+visible = false
 margin_left = 953.0
 margin_top = 532.0
 margin_right = 967.0
@@ -911,6 +912,7 @@ rect_min_size = Vector2( 400, 32 )
 theme = ExtResource( 44 )
 
 [node name="LoadStatus" type="Label" parent="Popups/LoadPanel"]
+visible = false
 margin_right = 400.0
 margin_bottom = 32.0
 size_flags_horizontal = 3

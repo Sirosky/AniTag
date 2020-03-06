@@ -83,7 +83,7 @@ func bulk_update():
 				bulk_update()
 				return
 			anidb_init(global.db_cur_key)
-			global.load_status = str(str(global.db[global.db_cur_key]["name"])+" ("+str(stepify((bulk_index/db_size)*100, .1))+"%)")
+			global.load_status = str(str(global.db[global.db_cur_key]["name"])+" ("+str(stepify((bulk_index/(db_size-1))*100, .1))+"%)")
 			print(global.load_status)
 		else:
 			global.Mes.message_send("Bulk update complete.")
