@@ -10,6 +10,7 @@ onready var ButSearchID = get_node("VBoxContainer/GridContainer/ButSearchID")
 
 onready var LineNameDisp = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/LineName")
 onready var LineAniDBName = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/LineAniDBName")
+onready var LineNameEng = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/LineNameEng")
 onready var LineID = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/LineID")
 onready var LinePath = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/LinePath")
 onready var TextDesc = get_node("/root/Main/Popups/EditPanel/VBoxContainer/GridContainer/TextDesc")
@@ -25,6 +26,7 @@ func _ready():
 func update():
 	LineNameDisp.text = global.db[global.db_cur_key]["name"]
 	LineAniDBName.text = global.db[global.db_cur_key]["anidb_name"]
+	LineNameEng.text = global.db[global.db_cur_key]["name_eng"]
 	LineID.text = str(global.db[global.db_cur_key]["id"])
 	LinePath.text = str(global.db[global.db_cur_key]["path"])
 	if str(global.db[global.db_cur_key]["description"]) == "":
@@ -41,6 +43,7 @@ func _on_ButSearchID_pressed():
 func _on_ButAccept_pressed():
 	global.db[global.db_cur_key]["id"] = str(LineID.text)
 	global.db[global.db_cur_key]["name"] = str(LineNameDisp.text)
+	global.db[global.db_cur_key]["name_eng"] = str(LineNameEng.text)
 	global.db[global.db_cur_key]["anidb_name"] = str(LineAniDBName.text)
 	global.db[global.db_cur_key]["path"] = str(LinePath.text)
 	global.db[global.db_cur_key]["description"] = str(TextDesc.text)

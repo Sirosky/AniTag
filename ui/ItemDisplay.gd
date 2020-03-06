@@ -3,6 +3,7 @@ var file_search = FileSearch.new() #Launch file search class
 
 onready var LibUpdater = get_node("../../Library/LibraryUpdater")
 onready var LibThumb = get_node("/root/Main/Library/LibraryThumb")
+onready var LibManager = get_node("/root/Main/Library/LibraryManager")
 
 onready var ButDir = get_node("VBoxContainer/TopHBox/ConfigVBox/ButDir")
 onready var ButDB = get_node("VBoxContainer/TopHBox/ConfigVBox/ButDB")
@@ -11,6 +12,7 @@ onready var ButLink = get_node("VBoxContainer/TopHBox/ConfigVBox/ButLink")
 onready var ButThumb = get_node("VBoxContainer/TopHBox/ConfigVBox/ButThumb")
 onready var ButEdit = get_node("VBoxContainer/TopHBox/ConfigVBox/ButEdit")
 onready var ButDelete = get_node("VBoxContainer/TopHBox/ConfigVBox/ButDelete")
+onready var ButMore = get_node("VBoxContainer/TopHBox/ConfigVBox/ButMore")
 onready var ButAccept = get_node("/root/Main/Popups/PopPanel/PopText/ButAccept")
 
 #UI
@@ -73,6 +75,9 @@ func _ready():
 	
 	ButDelete.connect("pressed",self,"_on_ButDelete_pressed")
 	ButDelete.hint_tooltip = "Delete library entry"
+	
+	ButMore.connect("pressed",self,"_on_ButMore_pressed")
+	ButMore.hint_tooltip = "More tools"
 	
 	#For ConfirmPanel
 	ButConfirm.connect("pressed",self,"_on_ButConfirm_pressed")
@@ -311,6 +316,9 @@ func _on_ButDelete_pressed():
 	ConfirmPanel.visible = 1
 	ConfirmPanel.mode = 1
 	ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This will delete the library entry permanently."
+
+func _on_ButMore_pressed():
+	LibManager.dir_rename(global.db_key_v)
 
 func _on_ButConfirm_pressed():
 	if ConfirmPanel.mode == 1:

@@ -261,20 +261,20 @@ func parse_db(ani_id, regex, return_all): #parse text
 		else:
 			result = _regex.search_all(text)
 		
-		if result!=null:
+		if result != null:
 			if return_all == 0:
-				print(result.get_string())
 				return result.get_string()
 			else: 
 				var result_temp = result.duplicate(0) #We have to convert the RegExMatch array into a normal array
 				
 				for i in range(0, result_temp.size()):
 					result[i] = result_temp[i].get_string()
-				
-				print(result)
-				return result		
+				return result
+		else:
+			print("parse_db couldn't find target")
 	else:
 		print("Regex compile failed")
+		global.Mes.send_message("Regex compile failed")
 
 func parse_db_advanced(ani_id, delim_1, delim_2, regex, return_all): #parse text
 	#Used to conduct a 2 tier search to narrow down returned strings
@@ -511,6 +511,11 @@ func anidb_pass_db(ani_id, update_images):
 		
 		global.db[global.db_cur_key]["id"] = parse_db(ani_id, '(?<=<anime id=")(.*)(?=" restricted)', 0)
 		global.db[global.db_cur_key]["anidb_name"] = parse_db(ani_id, '(?<=<title xml:lang="x-jat" type="main">)(.*)(?=</title>)', 0)
+		global.db[global.db_cur_key]["name_eng"] = parse_db(ani_id, '(?<=<title xml:lang="en" type="official">)(.*)(?=</title>)', 0)
+		if global.db[global.db_cur_key]["name_eng"] == null: #We didn't find anything, try an alternative
+			global.db[global.db_cur_key]["name_eng"] = parse_db(ani_id, '(?<=<title xml:lang="en" type="synonym">)(.*)(?=</title>)', 0)
+		if global.db[global.db_cur_key]["name_eng"] == null: #Really didn't find anything
+			global.db[global.db_cur_key]["name_eng"] = ""
 		global.db[global.db_cur_key]["date"] = parse_db(ani_id, '(?<=<startdate>)(.*)(?=</startdate>)', 0)
 		global.db[global.db_cur_key]["anidb_description"] = parse_db_dumb(ani_id, '<?xml', '<ratings>','<description>','</description>') #For some dumb reason, regex doesn't find correct desc sometimes
 		global.db[global.db_cur_key]["episodes"] = parse_db(ani_id, '(?<=<episodecount>)(.*)(?=</episodecount>)', 0)

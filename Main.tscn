@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ui/themes/default/bg.png" type="Texture" id=2]
@@ -45,6 +45,7 @@
 [ext_resource path="res://ui/themes/default/LL.tres" type="DynamicFont" id=43]
 [ext_resource path="res://ui/themes/default/ThemePanelRounded.tres" type="Theme" id=44]
 [ext_resource path="res://ui/ConfirmPanel.gd" type="Script" id=45]
+[ext_resource path="res://engine/LibraryManager.gd" type="Script" id=46]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.0235294, 0.14902, 0.541176 )
@@ -90,7 +91,8 @@ script = ExtResource( 6 )
 [node name="LibraryThumb" type="Node" parent="Library"]
 script = ExtResource( 7 )
 
-[node name="LibraryScanner" type="Node" parent="Library"]
+[node name="LibraryManager" type="Node" parent="Library"]
+script = ExtResource( 46 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 1920.0
@@ -154,6 +156,11 @@ icon = ExtResource( 12 )
 [node name="ButBulkUpdate" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
 margin_left = 200.0
 margin_right = 236.0
+icon = ExtResource( 13 )
+
+[node name="ButMore" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 240.0
+margin_right = 276.0
 icon = ExtResource( 13 )
 
 [node name="HBoxFilter" type="HBoxContainer" parent="HBoxContainer/Panel/LeftDisplay"]
@@ -475,6 +482,13 @@ margin_right = 36.0
 margin_bottom = 255.0
 icon = ExtResource( 42 )
 
+[node name="ButMore" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+margin_left = 0.0
+margin_top = 259.0
+margin_right = 36.0
+margin_bottom = 292.0
+icon = ExtResource( 27 )
+
 [node name="Padding2" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
 margin_top = 339.0
 margin_bottom = 347.0
@@ -618,7 +632,6 @@ theme = ExtResource( 31 )
 text = "OK"
 
 [node name="EditPanel" type="PanelContainer" parent="Popups"]
-visible = false
 margin_left = 953.0
 margin_top = 532.0
 margin_right = 967.0
@@ -632,13 +645,13 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 448.0
-margin_bottom = 366.0
+margin_bottom = 403.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Popups/EditPanel/VBoxContainer"]
 margin_right = 441.0
-margin_bottom = 322.0
+margin_bottom = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
@@ -691,68 +704,85 @@ margin_bottom = 107.0
 theme = ExtResource( 31 )
 text = "Search Name"
 
-[node name="Label2" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+[node name="Label6" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
 margin_top = 111.0
 margin_right = 181.0
 margin_bottom = 144.0
+theme = ExtResource( 31 )
+text = "English Name"
+
+[node name="LineNameEng" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_left = 185.0
+margin_top = 111.0
+margin_right = 441.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 256, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+caret_blink = true
+
+[node name="Label2" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
+margin_top = 148.0
+margin_right = 181.0
+margin_bottom = 181.0
 theme = ExtResource( 31 )
 text = "AniDB ID"
 
 [node name="LineID" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
 margin_left = 185.0
-margin_top = 111.0
+margin_top = 148.0
 margin_right = 441.0
-margin_bottom = 144.0
+margin_bottom = 181.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 caret_blink = true
 
 [node name="Control2" type="Control" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
-margin_top = 148.0
+margin_top = 185.0
 margin_right = 181.0
-margin_bottom = 181.0
+margin_bottom = 218.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ButSearchID" type="Button" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
 margin_left = 185.0
-margin_top = 148.0
+margin_top = 185.0
 margin_right = 441.0
-margin_bottom = 181.0
+margin_bottom = 218.0
 theme = ExtResource( 31 )
 text = "Search ID"
 
 [node name="Label3" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
-margin_top = 185.0
+margin_top = 222.0
 margin_right = 181.0
-margin_bottom = 218.0
+margin_bottom = 255.0
 theme = ExtResource( 31 )
 text = "Path"
 
 [node name="LinePath" type="LineEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
 margin_left = 185.0
-margin_top = 185.0
+margin_top = 222.0
 margin_right = 441.0
-margin_bottom = 218.0
+margin_bottom = 255.0
 rect_min_size = Vector2( 256, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 caret_blink = true
 
 [node name="Label5" type="Label" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
-margin_top = 255.0
+margin_top = 292.0
 margin_right = 181.0
-margin_bottom = 288.0
+margin_bottom = 325.0
 theme = ExtResource( 31 )
 text = "Custom Description"
 
 [node name="TextDesc" type="TextEdit" parent="Popups/EditPanel/VBoxContainer/GridContainer"]
 margin_left = 185.0
-margin_top = 222.0
+margin_top = 259.0
 margin_right = 441.0
-margin_bottom = 322.0
+margin_bottom = 359.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -763,9 +793,9 @@ __meta__ = {
 }
 
 [node name="HBoxBut" type="HBoxContainer" parent="Popups/EditPanel/VBoxContainer"]
-margin_top = 326.0
+margin_top = 363.0
 margin_right = 441.0
-margin_bottom = 359.0
+margin_bottom = 396.0
 size_flags_vertical = 2
 alignment = 2
 

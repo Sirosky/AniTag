@@ -1,6 +1,6 @@
 extends Node
 
-var anitag_version: float = 1.1
+var anitag_version: String = "1.1.1"
 var dir_path = ""
 var window_width: int = ProjectSettings.get("display/window/size/width")
 var window_height: int = ProjectSettings.get("display/window/size/height")

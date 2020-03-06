@@ -23,22 +23,16 @@ func library_load():
 		global.json_write(global.settings_path, global.settings) #Write to settings JSON
 		
 		#Update old saves if needed
-		var needs_update = 0
 		
-		if global.db["_Settings"].has("version") == false: #Update version
-			global.db["_Settings"]["version"] = global.anitag_version
-			needs_update = 1
-		elif float(global.db["_Settings"].has("version")) != global.anitag_version:
-			global.db["_Settings"]["version"] = global.anitag_version
-			needs_update = 1	
+		global.db["_Settings"]["version"] = global.anitag_version #Update version
 		
-		for i in global.db: 
-			if global.db[i].has("tags_user") == false and i != "_Settings":
+		for i in global.db:
+			if global.db[i].has("tags_user") == false and i != "_Settings": #Added 1.1.1
 				global.db[i]["tags_user"] = []
-				needs_update = 1
+			if global.db[i].has("name_eng") == false and i != "_Settings": #Added 1.1.1
+				global.db[i]["name_eng"] = ""
 		
-		if needs_update == 1:
-			global.json_write("user://db/"+global.db_name,global.db)
+		global.json_write("user://db/"+global.db_name,global.db)
 		
 		ViewListItem.directory_refresh()
 		Messenger.message_send(str(global.db_name) + " loaded.")

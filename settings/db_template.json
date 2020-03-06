@@ -1,12 +1,13 @@
 {
 	"_Settings": {
 		"main_path": "",
-		"version": 1.1
+		"version": "1.1.1"
 	},
 	"Template": {
 		"id": -1,
-		"anidb_name": "Name",
-		"name": "Name",
+		"anidb_name": "",
+		"name": "",
+		"name_eng": "",
 		"path": "",
 		"anidb_description": "",
 		"description": "",
