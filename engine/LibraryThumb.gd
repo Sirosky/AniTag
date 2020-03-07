@@ -185,6 +185,10 @@ func _process(delta):
 	
 	if job_continue == 1 and job_timer == 0:
 		#If job is finished, end everything
+		thumbs_create(thumbs_sorted[job_index])
+		job_index += 1
+		job_timer = job_timer_delay
+		
 		if job_index > thumbs_sorted.size()-1:
 			job_continue = 0
 			job_index = 0
@@ -192,9 +196,7 @@ func _process(delta):
 			ThumbsCon.visible = 1
 			#ThumbsCon.sort_children("TextureRect", ItemDisplay.rect_size.x,3)
 		
-		thumbs_create(thumbs_sorted[job_index])
-		job_index += 1
-		job_timer = job_timer_delay
+		
 
 func thumbs_refresh(): #Begins the refreshing job
 	var ani_id = str(global.db[global.db_key_v]["id"])
@@ -224,7 +226,8 @@ func thumbs_refresh(): #Begins the refreshing job
 			if keys.has(entry):
 				thumbs_sorted.append(entry)
 			else:
-				print("Image entry not found")
+				print("E: Image " + str(entry) + "not found")
+				return
 			c+=1
 		job_continue = 1 #Initiate the job
 		job_index = 0
@@ -244,7 +247,7 @@ func thumbs_create(entry): #Create each individual thumbnail. Only called during
 		var err = image.load(entry)
 		
 		if err != OK:
-			print("Error loading cover")
+			print("Error loading thumb- "+ str(err))
 			global.load_status = str("Thumb couldn't be loaded :(")
 			return
 		

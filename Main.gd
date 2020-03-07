@@ -7,6 +7,7 @@ var file_search = FileSearch.new() #Launch file search class
 onready var BG = get_node("BG")
 onready var HBox = get_node("HBoxContainer")
 onready var LibraryLoader = get_node("Library/LibraryLoader")
+onready var Popups = get_node("/root/Main/Popups") 
 
 
 func _ready():
@@ -34,6 +35,8 @@ func _ready():
 	#OS.set_window_size(Vector2( 1920, 1080 ))
 	#print(ProjectSettings.globalize_path("user://"))
 	
+	Popups.visible = 0
+	
 	var dir = Directory.new()  
 	if dir.dir_exists("user://db") == false: #Make sure db folder exists
 		dir.make_dir("user://db")
@@ -41,12 +44,13 @@ func _ready():
 		dir.make_dir("user://db/anidb")
 	
 	LibraryLoader.settings_load()
+	global.window_manage()
 	#ProjectSettings.set_setting("display/window/size/width", global.screen_size.x);
 	#ProjectSettings.set_setting("display/window/size/height", global.screen_size.y);
 	#ProjectSettings.save();
 	#Automatically resize as needed
-	OS.window_size = (Vector2(global.screen_size.x,global.screen_size.y))
-	OS.window_fullscreen = 0
+	#OS.window_size = (Vector2(global.screen_size.x,global.screen_size.y))
+	#OS.window_fullscreen = 0
 	#OS.set_window_position(Vector2(1280, 0))
 	
 func _process(_delta):

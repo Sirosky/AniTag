@@ -34,7 +34,9 @@ AniTag is built on [Godot game engine](https://godotengine.org/). It's a rather 
 
 - [u/willnationsdev](https://reddit.com/user/willnationsdev) for providing invaluable assistance throughout the six months of development. Helped me overcome several crucial stages in the development of AniTag.
 - [u/whietfegeet](https://old.reddit.com/user/whietfegeet) AKA Fatorias AKA Apple for alpha testing and severing as impromptu QA.
+- [u/leanderish](reddit.com/user/leanderish) for his screen resolution management script
 - FFMPEG & 7Zip for their wonderful software
+- ... and of course, the contributors and developers of Godot for making this all possible.
 
 ## Quick Start Guide
 

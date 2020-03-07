@@ -57,10 +57,20 @@ func directory_refresh():
 				if int(global.db[temp.stored_str]["id"]) == -1:
 					temp.icon = ico_exclam
 					temp.hint_tooltip = "AniDB ID not assigned."
+				else:
+					var ani_id = str(global.db[temp.stored_str]["id"])
+					var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str("1")+".jpg")
+					var file_temp = File.new() #Verify file rename succeeded
+					if file_temp.file_exists(entry) == false:
+						temp.icon = ico_exclam
+						temp.hint_tooltip = "Missing thumbnail"
+				
 				var dir_temp = Directory.new()
 				if dir_temp.dir_exists(global.db[temp.stored_str]["path"]) == false:
 					temp.icon = ico_exclam
 					temp.hint_tooltip = "Invalid directory"
+				
+				
 			
 			but_index.append(temp) #add this into our button array
 			

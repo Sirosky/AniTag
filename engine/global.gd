@@ -116,4 +116,9 @@ func sort_dic_value(dic): #Sorts dictionary by value
 			dic_sorted[ii] = i #Add key-value pair to create sorted dictionary
 	
 	return dic_sorted
-				
+	
+func window_manage():
+	if global.settings["General"]["fullscreen"] == true:
+		resolution_manager.set_fullscreen()
+	else:
+		resolution_manager.set_windowed()

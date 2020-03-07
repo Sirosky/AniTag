@@ -598,6 +598,7 @@ margin_right = 753.0
 margin_bottom = 7.0
 
 [node name="Popups" type="CenterContainer" parent="."]
+visible = false
 margin_left = -9.7113
 margin_top = 1.67017
 margin_right = 1910.29
@@ -1032,10 +1033,11 @@ margin_bottom = 233.0
 tab_close_display_policy = 1
 
 [node name="SettingsPanel" type="PanelContainer" parent="Popups"]
-margin_left = 757.0
-margin_top = 450.0
-margin_right = 1163.0
-margin_bottom = 629.0
+visible = false
+margin_left = 953.0
+margin_top = 532.0
+margin_right = 967.0
+margin_bottom = 546.0
 script = ExtResource( 50 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Popups/SettingsPanel"]

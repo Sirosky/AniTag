@@ -24,6 +24,7 @@ func _on_ButAccept_pressed():
 	global.settings["General"]["error"] = CheckError.pressed
 	global.settings["General"]["fullscreen"] = CheckFullscreen.pressed
 	global.json_write(global.settings_path, global.settings)
+	global.window_manage()
 	global.Mes.message_send("Settings saved")
 
 func _on_ButCancel_pressed():
