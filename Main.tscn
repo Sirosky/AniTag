@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ui/themes/default/bg.png" type="Texture" id=2]
@@ -46,6 +46,11 @@
 [ext_resource path="res://ui/themes/default/ThemePanelRounded.tres" type="Theme" id=44]
 [ext_resource path="res://ui/ConfirmPanel.gd" type="Script" id=45]
 [ext_resource path="res://engine/LibraryManager.gd" type="Script" id=46]
+[ext_resource path="res://ui/ToolsPanel.gd" type="Script" id=47]
+[ext_resource path="res://ui/themes/default/icons/bulk_tool.png" type="Texture" id=48]
+[ext_resource path="res://ui/themes/default/icons/tool.png" type="Texture" id=49]
+[ext_resource path="res://ui/SettingsPanel.gd" type="Script" id=50]
+[ext_resource path="res://ui/themes/default/icons/settings.png" type="Texture" id=51]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.0235294, 0.14902, 0.541176 )
@@ -161,7 +166,12 @@ icon = ExtResource( 13 )
 [node name="ButMore" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
 margin_left = 240.0
 margin_right = 276.0
-icon = ExtResource( 13 )
+icon = ExtResource( 48 )
+
+[node name="ButSettings" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 280.0
+margin_right = 316.0
+icon = ExtResource( 51 )
 
 [node name="HBoxFilter" type="HBoxContainer" parent="HBoxContainer/Panel/LeftDisplay"]
 margin_top = 45.0
@@ -487,7 +497,7 @@ margin_left = 0.0
 margin_top = 259.0
 margin_right = 36.0
 margin_bottom = 292.0
-icon = ExtResource( 27 )
+icon = ExtResource( 49 )
 
 [node name="Padding2" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
 margin_top = 339.0
@@ -588,7 +598,6 @@ margin_right = 753.0
 margin_bottom = 7.0
 
 [node name="Popups" type="CenterContainer" parent="."]
-visible = false
 margin_left = -9.7113
 margin_top = 1.67017
 margin_right = 1910.29
@@ -990,6 +999,111 @@ text = "OK"
 [node name="ButCancel" type="Button" parent="Popups/ConfirmPanel/VBoxContainer/HBoxContainer"]
 margin_left = 100.0
 margin_right = 171.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
+
+[node name="ToolsPanel" type="PanelContainer" parent="Popups"]
+visible = false
+margin_left = 840.0
+margin_top = 419.0
+margin_right = 1080.0
+margin_bottom = 659.0
+rect_min_size = Vector2( 240, 240 )
+script = ExtResource( 47 )
+
+[node name="OptionButton" type="OptionButton" parent="Popups/ToolsPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 233.0
+margin_bottom = 233.0
+
+[node name="Tabs2" type="Tabs" parent="Popups/ToolsPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 233.0
+margin_bottom = 233.0
+
+[node name="Tabs3" type="Tabs" parent="Popups/ToolsPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 233.0
+margin_bottom = 233.0
+tab_close_display_policy = 1
+
+[node name="SettingsPanel" type="PanelContainer" parent="Popups"]
+margin_left = 757.0
+margin_top = 450.0
+margin_right = 1163.0
+margin_bottom = 629.0
+script = ExtResource( 50 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/SettingsPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 399.0
+margin_bottom = 172.0
+
+[node name="GridContainer" type="GridContainer" parent="Popups/SettingsPanel/VBoxContainer"]
+margin_right = 392.0
+margin_bottom = 128.0
+columns = 2
+
+[node name="LabeLoad" type="Label" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_top = 3.0
+margin_right = 312.0
+margin_bottom = 36.0
+theme = ExtResource( 31 )
+text = "Autoload last library on startup"
+
+[node name="CheckLoad" type="CheckButton" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_left = 316.0
+margin_right = 392.0
+margin_bottom = 40.0
+
+[node name="LabelError" type="Label" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_top = 47.0
+margin_right = 312.0
+margin_bottom = 80.0
+theme = ExtResource( 31 )
+text = "Check for missing metadata on load"
+
+[node name="CheckError" type="CheckButton" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_left = 316.0
+margin_top = 44.0
+margin_right = 392.0
+margin_bottom = 84.0
+
+[node name="LabelFullscreen" type="Label" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_top = 91.0
+margin_right = 312.0
+margin_bottom = 124.0
+theme = ExtResource( 31 )
+text = "Fullscreen mode"
+
+[node name="CheckFullscreen" type="CheckButton" parent="Popups/SettingsPanel/VBoxContainer/GridContainer"]
+margin_left = 316.0
+margin_top = 88.0
+margin_right = 392.0
+margin_bottom = 128.0
+
+[node name="HBoxBut" type="HBoxContainer" parent="Popups/SettingsPanel/VBoxContainer"]
+margin_top = 132.0
+margin_right = 392.0
+margin_bottom = 165.0
+size_flags_vertical = 2
+alignment = 1
+
+[node name="ButAccept" type="Button" parent="Popups/SettingsPanel/VBoxContainer/HBoxBut"]
+margin_left = 93.0
+margin_right = 224.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Save Changes"
+
+[node name="ButCancel" type="Button" parent="Popups/SettingsPanel/VBoxContainer/HBoxBut"]
+margin_left = 228.0
+margin_right = 299.0
 margin_bottom = 33.0
 theme = ExtResource( 31 )
 text = "Cancel"

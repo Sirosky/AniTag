@@ -47,9 +47,18 @@ func settings_load():
 		global.settings = {}
 		global.settings = global.json_read(global.settings_path)
 		
-		if global.settings["General"]["main_path"]!="": #Autoload
+		if !global.settings["General"].has("autoload"):
+			global.settings["General"]["autoload"] = true
+		if !global.settings["General"].has("error"):
+			global.settings["General"]["error"] = true
+		if !global.settings["General"].has("fullscreen"):
+			global.settings["General"]["fullscreen"] = true
+		
+		if global.settings["General"]["main_path"]!="" and global.settings["General"]["autoload"] == true: #Autoload
 			global.db_path = global.settings["General"]["main_path"]
 			library_load()
+		
+		global.json_write(global.settings_path, global.settings)
 	else:
-		print("File not found, cannot load settings")
+		print("CE: settings file not found")
 

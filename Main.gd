@@ -3,8 +3,9 @@ extends Control
 var directory = ""
 
 var file_search = FileSearch.new() #Launch file search class
-onready var HBox = get_node("HBoxContainer")
 
+onready var BG = get_node("BG")
+onready var HBox = get_node("HBoxContainer")
 onready var LibraryLoader = get_node("Library/LibraryLoader")
 
 
@@ -45,6 +46,7 @@ func _ready():
 	#ProjectSettings.save();
 	#Automatically resize as needed
 	OS.window_size = (Vector2(global.screen_size.x,global.screen_size.y))
+	OS.window_fullscreen = 0
 	#OS.set_window_position(Vector2(1280, 0))
 	
 func _process(_delta):
@@ -52,6 +54,9 @@ func _process(_delta):
 	var window_size = OS.get_window_size()
 	HBox.rect_size.x = window_size.x
 	HBox.rect_size.y = window_size.y
+	
+	BG.rect_size.x = window_size.x
+	BG.rect_size.y = window_size.y
 	"""
 	"""
 	

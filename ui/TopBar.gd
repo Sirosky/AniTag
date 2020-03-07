@@ -9,6 +9,7 @@ onready var ButRandom = get_node("TopBarHBox/ButRandom")
 onready var ButBulkThumb = get_node("TopBarHBox/ButBulkThumb")
 onready var ButBulkUpdate = get_node("TopBarHBox/ButBulkUpdate")
 onready var ButMore = get_node("TopBarHBox/ButMore")
+onready var ButSettings = get_node("TopBarHBox/ButSettings")
 onready var ButFilter = get_node("../HBoxFilter/ButFilter")
 
 onready var FileDiag = get_node("/root/Main/Popups/FileDialog") 
@@ -23,6 +24,7 @@ onready var PopPanel = get_node("../../../../Popups/PopPanel")
 onready var PopText = get_node("../../../../Popups/PopPanel/PopText")
 onready var PopTag = get_node("/root/Main/Popups/TagPanel")
 onready var ConfirmPanel = get_node("/root/Main/Popups/ConfirmPanel")
+onready var SettingsPanel = get_node("/root/Main/Popups/SettingsPanel")
 onready var ButConfirm = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButConfirm")
 onready var ButCancel = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButCancel")
 onready var ButAccept = get_node("../../../../Popups/PopPanel/PopText/ButAccept")
@@ -54,6 +56,9 @@ func _ready():
 	
 	ButMore.connect("pressed",self,"_on_ButMore_pressed")
 	ButMore.hint_tooltip = "More tools"
+	
+	ButSettings.connect("pressed",self,"_on_ButSettings_pressed")
+	ButSettings.hint_tooltip = "Change AniTag settings"
 	
 	ButAccept.connect("pressed",self,"_on_ButAccept_pressed")
 	
@@ -127,6 +132,11 @@ func _on_ButMore_pressed():
 	ConfirmPanel.visible = 1
 	ConfirmPanel.mode = 2
 	ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This renames a number of directories according to their AniDB name."
+
+func _on_ButSettings_pressed():
+	Popups.visible = 1
+	SettingsPanel.visible = 1
+	SettingsPanel.init()
 
 func _on_ButConfirm_pressed():
 	if ConfirmPanel.mode == 2:

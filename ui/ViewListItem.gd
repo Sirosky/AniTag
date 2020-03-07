@@ -52,13 +52,16 @@ func directory_refresh():
 			temp.text = i #str(global.db[i]["name"]) #update text label
 			temp.hint_tooltip = i#str(global.db[i]["name"])
 			
-			if int(global.db[temp.stored_str]["id"]) == -1:
-				temp.icon = ico_exclam
-				temp.hint_tooltip = "AniDB ID not assigned."
-			var dir_temp = Directory.new()
-			if dir_temp.dir_exists(global.db[temp.stored_str]["path"]) == false:
-				temp.icon = ico_exclam
-				temp.hint_tooltip = "Invalid directory"
+			#Check for errors
+			if global.settings["General"]["error"] == true:
+				if int(global.db[temp.stored_str]["id"]) == -1:
+					temp.icon = ico_exclam
+					temp.hint_tooltip = "AniDB ID not assigned."
+				var dir_temp = Directory.new()
+				if dir_temp.dir_exists(global.db[temp.stored_str]["path"]) == false:
+					temp.icon = ico_exclam
+					temp.hint_tooltip = "Invalid directory"
+			
 			but_index.append(temp) #add this into our button array
 			
 			#Find tags while we're at it.
