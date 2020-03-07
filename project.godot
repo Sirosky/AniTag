@@ -43,6 +43,7 @@ resolution_manager="*res://ui/resolution_manager.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
 window/dpi/allow_hidpi=true
 
 [memory]

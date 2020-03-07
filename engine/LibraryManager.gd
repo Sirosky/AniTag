@@ -54,6 +54,16 @@ func dir_rename(entry):
 		if illegal_pos != -1: #Remove invalid characters
 			dir_new.erase(illegal_pos, 1)
 			global.Mes.message_send("Illegal character ':' excluded.")
+			
+		illegal_pos = dir_new.find_last("?")
+		if illegal_pos != -1: #Remove invalid characters
+			dir_new.erase(illegal_pos, 1)
+			global.Mes.message_send("Illegal character '?' excluded.")
+			
+		illegal_pos = dir_new.find_last("*")
+		if illegal_pos != -1: #Remove invalid characters
+			dir_new.erase(illegal_pos, 1)
+			global.Mes.message_send("Illegal character '*' excluded.")
 		
 		dir_new = str(dir_base + dir_new)
 		print(dir_old)
