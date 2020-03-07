@@ -226,7 +226,7 @@ func thumbs_refresh(): #Begins the refreshing job
 			if keys.has(entry):
 				thumbs_sorted.append(entry)
 			else:
-				print("E: Image " + str(entry) + "not found")
+				print("E: Image " + str(entry) + " not found")
 				return
 			c+=1
 		job_continue = 1 #Initiate the job
