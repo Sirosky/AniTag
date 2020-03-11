@@ -38,6 +38,7 @@ onready var StaffGrid = get_node("VBoxContainer/InfoBox/PanelRight/StaffGrid")
 onready var Popups = get_node("../../Popups")
 onready var EditPanel = get_node("../../Popups/EditPanel")
 onready var ConfirmPanel = get_node("../../Popups/ConfirmPanel")
+onready var ToolsPanel = get_node("../../Popups/ToolsPanel")
 onready var ButConfirm = get_node("../../Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButConfirm")
 onready var ButCancel = get_node("../../Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButCancel")
 onready var PopPanel = get_node("/root/Main/Popups/PopPanel")
@@ -318,7 +319,10 @@ func _on_ButDelete_pressed():
 	ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This will delete the library entry permanently."
 
 func _on_ButMore_pressed():
-	LibManager.dir_rename(global.db_key_v)
+	Popups.visible = 1
+	ToolsPanel.visible = 1
+	ToolsPanel.mode_bulk = 0
+	ToolsPanel.labels_refresh()
 
 func _on_ButConfirm_pressed():
 	if ConfirmPanel.mode == 1:

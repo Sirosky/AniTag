@@ -25,6 +25,7 @@ onready var PopText = get_node("../../../../Popups/PopPanel/PopText")
 onready var PopTag = get_node("/root/Main/Popups/TagPanel")
 onready var ConfirmPanel = get_node("/root/Main/Popups/ConfirmPanel")
 onready var SettingsPanel = get_node("/root/Main/Popups/SettingsPanel")
+onready var ToolsPanel = get_node("/root/Main/Popups/ToolsPanel")
 onready var ButConfirm = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButConfirm")
 onready var ButCancel = get_node("/root/Main/Popups/ConfirmPanel/VBoxContainer/HBoxContainer/ButCancel")
 onready var ButAccept = get_node("../../../../Popups/PopPanel/PopText/ButAccept")
@@ -129,9 +130,12 @@ func _on_ButBulkUpdate_pressed():
 
 func _on_ButMore_pressed():
 	Popups.visible = 1
-	ConfirmPanel.visible = 1
-	ConfirmPanel.mode = 2
-	ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This renames a number of directories according to their AniDB name."
+	ToolsPanel.visible = 1
+	ToolsPanel.mode_bulk = 1
+	ToolsPanel.labels_refresh()
+	#ConfirmPanel.visible = 1
+	#ConfirmPanel.mode = 2
+	#ConfirmPanel.get_node("VBoxContainer/MarginContainer/Label").text = "This renames a number of directories according to their AniDB name."
 
 func _on_ButSettings_pressed():
 	Popups.visible = 1

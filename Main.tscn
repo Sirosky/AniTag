@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ui/themes/default/bg.png" type="Texture" id=2]
@@ -51,6 +51,8 @@
 [ext_resource path="res://ui/themes/default/icons/tool.png" type="Texture" id=49]
 [ext_resource path="res://ui/SettingsPanel.gd" type="Script" id=50]
 [ext_resource path="res://ui/themes/default/icons/settings.png" type="Texture" id=51]
+[ext_resource path="res://ui/GrpRenameDirectories.tres" type="ButtonGroup" id=52]
+[ext_resource path="res://ui/GrpRenameEntries.tres" type="ButtonGroup" id=53]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.0235294, 0.14902, 0.541176 )
@@ -485,19 +487,19 @@ margin_right = 36.0
 margin_bottom = 218.0
 icon = ExtResource( 27 )
 
-[node name="ButDelete" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+[node name="ButMore" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
 margin_left = 0.0
 margin_top = 222.0
 margin_right = 36.0
 margin_bottom = 255.0
-icon = ExtResource( 42 )
+icon = ExtResource( 49 )
 
-[node name="ButMore" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
+[node name="ButDelete" parent="HBoxContainer/ItemDisplay/VBoxContainer/TopHBox/ConfigVBox" instance=ExtResource( 22 )]
 margin_left = 0.0
 margin_top = 259.0
 margin_right = 36.0
 margin_bottom = 292.0
-icon = ExtResource( 49 )
+icon = ExtResource( 42 )
 
 [node name="Padding2" type="MarginContainer" parent="HBoxContainer/ItemDisplay/VBoxContainer"]
 margin_top = 339.0
@@ -599,10 +601,10 @@ margin_bottom = 7.0
 
 [node name="Popups" type="CenterContainer" parent="."]
 visible = false
-margin_left = -9.7113
-margin_top = 1.67017
-margin_right = 1910.29
-margin_bottom = 1081.67
+margin_left = -10.0
+margin_top = 2.0
+margin_right = 1921.0
+margin_bottom = 1082.0
 rect_min_size = Vector2( 1280, 720 )
 mouse_filter = 1
 script = ExtResource( 34 )
@@ -612,10 +614,10 @@ __meta__ = {
 
 [node name="PopPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 953.0
-margin_top = 532.0
-margin_right = 967.0
-margin_bottom = 546.0
+margin_left = 958.0
+margin_top = 533.0
+margin_right = 972.0
+margin_bottom = 547.0
 size_flags_horizontal = 13
 size_flags_vertical = 13
 script = ExtResource( 39 )
@@ -643,10 +645,10 @@ text = "OK"
 
 [node name="EditPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 953.0
-margin_top = 532.0
-margin_right = 967.0
-margin_bottom = 546.0
+margin_left = 958.0
+margin_top = 533.0
+margin_right = 972.0
+margin_bottom = 547.0
 script = ExtResource( 32 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -826,10 +828,10 @@ text = "Cancel"
 
 [node name="TagPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 953.0
-margin_top = 532.0
-margin_right = 967.0
-margin_bottom = 546.0
+margin_left = 958.0
+margin_top = 533.0
+margin_right = 972.0
+margin_bottom = 547.0
 size_flags_horizontal = 13
 size_flags_vertical = 13
 script = ExtResource( 37 )
@@ -914,10 +916,10 @@ text = "Accept"
 
 [node name="LoadPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 760.0
-margin_top = 523.0
-margin_right = 1160.0
-margin_bottom = 555.0
+margin_left = 765.0
+margin_top = 524.0
+margin_right = 1165.0
+margin_bottom = 556.0
 rect_min_size = Vector2( 400, 32 )
 theme = ExtResource( 44 )
 
@@ -935,10 +937,10 @@ clip_text = true
 
 [node name="ImagePanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 953.0
-margin_top = 532.0
-margin_right = 967.0
-margin_bottom = 546.0
+margin_left = 958.0
+margin_top = 533.0
+margin_right = 972.0
+margin_bottom = 547.0
 script = ExtResource( 38 )
 
 [node name="ThumbLarge" type="TextureRect" parent="Popups/ImagePanel"]
@@ -953,10 +955,10 @@ expand = true
 
 [node name="ConfirmPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 840.0
-margin_top = 494.0
-margin_right = 1080.0
-margin_bottom = 584.0
+margin_left = 845.0
+margin_top = 495.0
+margin_right = 1085.0
+margin_bottom = 585.0
 rect_min_size = Vector2( 240, 90 )
 script = ExtResource( 45 )
 
@@ -1004,40 +1006,168 @@ margin_bottom = 33.0
 theme = ExtResource( 31 )
 text = "Cancel"
 
-[node name="ToolsPanel" type="PanelContainer" parent="Popups"]
+[node name="ToolsPanel" type="TabContainer" parent="Popups"]
 visible = false
-margin_left = 840.0
-margin_top = 419.0
-margin_right = 1080.0
-margin_bottom = 659.0
-rect_min_size = Vector2( 240, 240 )
+margin_left = 961.0
+margin_top = 522.0
+margin_right = 969.0
+margin_bottom = 558.0
+rect_clip_content = true
+tab_align = 0
 script = ExtResource( 47 )
 
-[node name="OptionButton" type="OptionButton" parent="Popups/ToolsPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 233.0
-margin_bottom = 233.0
+[node name="Rename Directories" type="MarginContainer" parent="Popups/ToolsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
 
-[node name="Tabs2" type="Tabs" parent="Popups/ToolsPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 233.0
-margin_bottom = 233.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/ToolsPanel/Rename Directories"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 676.0
+margin_bottom = 181.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="Tabs3" type="Tabs" parent="Popups/ToolsPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 233.0
-margin_bottom = 233.0
-tab_close_display_policy = 1
+[node name="Label" type="Label" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_right = 670.0
+margin_bottom = 25.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 43 )
+text = "This tool renames the folders of each library entry according to their AniDB ID."
+
+[node name="Label2" type="Label" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_top = 29.0
+margin_right = 670.0
+margin_bottom = 54.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 43 )
+text = "Be very careful-- this process is irreversible."
+
+[node name="CheckBoxDisplayed" type="CheckBox" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_top = 58.0
+margin_right = 670.0
+margin_bottom = 82.0
+pressed = true
+group = ExtResource( 52 )
+text = "Rename using the displayed name"
+
+[node name="CheckBoxDisplayed2" type="CheckBox" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_top = 86.0
+margin_right = 670.0
+margin_bottom = 110.0
+group = ExtResource( 52 )
+text = "Rename using AniDB name"
+
+[node name="CheckBoxDisplayed3" type="CheckBox" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_top = 114.0
+margin_right = 670.0
+margin_bottom = 138.0
+group = ExtResource( 52 )
+text = "Rename using AniDB English name where available, and AniDB name if not"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer"]
+margin_top = 142.0
+margin_right = 670.0
+margin_bottom = 175.0
+
+[node name="ButConfirm" type="Button" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "OK"
+
+[node name="ButCancel" type="Button" parent="Popups/ToolsPanel/Rename Directories/VBoxContainer/HBoxContainer"]
+margin_left = 45.0
+margin_right = 116.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
+
+[node name="Rename Entries" type="MarginContainer" parent="Popups/ToolsPanel"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+custom_constants/margin_right = 6
+custom_constants/margin_top = 6
+custom_constants/margin_left = 6
+custom_constants/margin_bottom = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Popups/ToolsPanel/Rename Entries"]
+margin_left = 6.0
+margin_top = 6.0
+margin_right = 524.0
+margin_bottom = 153.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer"]
+margin_right = 518.0
+margin_bottom = 25.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 43 )
+text = "This tool renames each entry according to their AniDB name."
+
+[node name="Label2" type="Label" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer"]
+margin_top = 29.0
+margin_right = 518.0
+margin_bottom = 54.0
+rect_clip_content = true
+custom_fonts/font = ExtResource( 43 )
+text = "Consider backing up your library first."
+
+[node name="CheckBoxDisplayed2" type="CheckBox" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer"]
+margin_top = 58.0
+margin_right = 518.0
+margin_bottom = 82.0
+pressed = true
+group = ExtResource( 53 )
+text = "Rename using AniDB name"
+
+[node name="CheckBoxDisplayed3" type="CheckBox" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer"]
+margin_top = 86.0
+margin_right = 518.0
+margin_bottom = 110.0
+group = ExtResource( 53 )
+text = "Rename using AniDB English name where available, and AniDB name if not"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer"]
+margin_top = 114.0
+margin_right = 518.0
+margin_bottom = 147.0
+
+[node name="ButConfirm" type="Button" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer/HBoxContainer"]
+margin_right = 41.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "OK"
+
+[node name="ButCancel" type="Button" parent="Popups/ToolsPanel/Rename Entries/VBoxContainer/HBoxContainer"]
+margin_left = 45.0
+margin_right = 116.0
+margin_bottom = 33.0
+theme = ExtResource( 31 )
+text = "Cancel"
 
 [node name="SettingsPanel" type="PanelContainer" parent="Popups"]
 visible = false
-margin_left = 953.0
-margin_top = 532.0
-margin_right = 967.0
-margin_bottom = 546.0
+margin_left = 958.0
+margin_top = 533.0
+margin_right = 972.0
+margin_bottom = 547.0
 script = ExtResource( 50 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Popups/SettingsPanel"]
@@ -1111,10 +1241,10 @@ theme = ExtResource( 31 )
 text = "Cancel"
 
 [node name="FileDialog" type="FileDialog" parent="Popups"]
-margin_left = 660.0
-margin_top = 339.0
-margin_right = 1260.0
-margin_bottom = 739.0
+margin_left = 665.0
+margin_top = 340.0
+margin_right = 1265.0
+margin_bottom = 740.0
 rect_min_size = Vector2( 600, 400 )
 theme = ExtResource( 29 )
 window_title = "Open a Directory"
