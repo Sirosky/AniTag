@@ -22,9 +22,9 @@ Grab the latest version [here](https://github.com/Sirosky/AniTag/releases).
 
 ## Some Pics!
 
-![](https://files.catbox.moe/3eus1b.png)
+![](https://files.catbox.moe/jmaxy8.png)
 
-![](https://files.catbox.moe/ihobwp.png)
+![](https://files.catbox.moe/ss7olp.jpg)
 
 ## Under the Hood
 
