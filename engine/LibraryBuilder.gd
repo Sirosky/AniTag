@@ -110,16 +110,27 @@ func library_build():
 		
 	if refreshing == 1: #Just refreshing a current library
 		print("Refreshing")
+		var existing_dirs = {} #value = id, key = directory
+		
+		for i in global.db:
+			if i != "_Settings":
+				existing_dirs[global.db[i]["path"]] = i
+		
+		#print(existing_dirs)
 		
 		for i in dirs:
-			var index = str(i.get_file())
+			var index
 			
-			if global.db.has(index) == true: #The target directory exists in the current database
+			if existing_dirs.has(i) == true: #The target directory exists in the current database
 				#global.db[index]["name"] = index
 				#global.db[index]["anidb_name"] = index
+				index = existing_dirs[i]
+				#print(index)
 				global.db[index]["path"] = i
 			else: #Make a new entry since it doesn't exist
 				var dbalt = db["Template"].duplicate() #duplicate any entry as a template
+				index = str(i.get_file())
+				print("New- " + str(i))
 				
 				global.db[index] = dbalt #Merge in as a new entry!
 				global.db[index]["name"] = index
