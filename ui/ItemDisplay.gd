@@ -270,7 +270,12 @@ func _on_ButDB_pressed():
 
 func _on_ButUpdate_pressed():
 	if global.db.size()>0 and global.ani_selected!="":
-		LibUpdater.anidb_init(global.ani_selected)
+		
+		if int(global.db[global.db_cur_key]["id"]) >= 0:
+			global.anidb_search_id = global.db[global.db_cur_key]["id"] 
+			LibUpdater.anidb_access_api(global.anidb_search_id)
+		else:
+			LibUpdater.anidb_init(global.ani_selected)
 	
 func _on_ButLink_pressed():
 	if global.db.size()>0:
