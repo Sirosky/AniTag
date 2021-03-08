@@ -1,5 +1,5 @@
 extends Node
-#Responsible for downloading/ reading XMLs from AniDB
+#Responsible for downloading/ reading XMLs from AniDB, updating master list
 """
 Order of calling
 1) anidb_init
@@ -58,6 +58,10 @@ func _ready():
 	#parse_db(6675, '(?<=<name>)(.*)(?=</name>)', 1) #Find all available instances, used for getting tags
 	#parse_db_advanced(6675, '<tags>', '</tags>', '(?<=<name>)(.*)(?=</name>)', 1)
 	#anidb_access_image(2012, 237235)
+
+
+	
+
 func bulk_update():
 	var db_size: int = int(global.db.size())
 	print("db_size")
@@ -155,7 +159,7 @@ func anidb_decompress(ani_id): #Called only after anidb_access_api has downloade
 	
 	if file_temp.file_exists("user://db/anidb/"+str(ani_id)+".tmp"):
 		lib_update_stage = 2
-		OS.execute(zip_path, ["e", str(out_path)+str(ani_id)+".tmp", "-y", "-o"+str(out_path)], 0)
+		OS.execute(zip_path, ["e", str(out_path)+str(ani_id)+".tmp",  "-r", "-y", "-o"+str(out_path)], 0)
 		global.load_status = str("Decompressing XML DB")
 		ani_id_check = ani_id
 		timer = 30
@@ -182,6 +186,14 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		global.load_status = str("Cover image updated")
 		lib_update_stage = 7
 		anidb_refresh_cover(global.anidb_search_id)
+		
+	if lib_update_stage == 100: #Downloading master list
+		global.Mes.message_send("Master list updated.")
+		LoadPanel.visible = 0
+		LoadStatus.visible = 0
+		Popups.visible = 0
+		global.load_status_prepend = ""
+		global.load_status = ""
 
 
 
@@ -683,6 +695,19 @@ func anidb_access_image(ani_id, image_id):
 	#$HTTPRequest.set_download_file(str(str(down_path+str(anidb_id)+".xml")))
 	HTTPR.set_download_file("user://db/anidb/"+str(ani_id)+"/"+str(image_id)+".jpg")
 	HTTPR.request(download_link)
+	
+func anidb_list_update(): #Updates anime-list-master.xml
+	lib_update_stage = 100
+	
+	Popups.visible = 1
+	LoadPanel.visible = 1
+	LoadStatus.visible = 1
+	
+	global.load_status = "Downloading updated list. Please wait."
+	HTTPR.set_download_file("res://settings/anime-list-master.xml")
+	HTTPR.request(global.anidb_list_url)
+		
+	print(HTTPR.get_body_size())
 	
 func parse_string(text, delim_1, delim_2, delim_3, delim_4): #parse text
 	#No Regex used here.

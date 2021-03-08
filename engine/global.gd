@@ -22,6 +22,7 @@ var db_arr_id = {} #Keys = names, values = the ID of the show used in db dic
 var anidb_search_id = 0
 var anidb_api_url = "http://api.anidb.net:9001/httpapi?request=anime&client=xbmcscrap&clientver=1&protover=1&aid="
 var anidb_cdn_url = "http://cdn-us.anidb.net/images/main/"
+var anidb_list_url = "https://raw.githubusercontent.com/Anime-Lists/anime-lists/master/anime-list-master.xml"
 var down_path = "user://db/"
 
 var filter_vid_regex = "(.mkv|.ogv|.mp4|.ogm|.avi|.mov|.flv|.wmv|.m4v|.mpg|.mpeg|.mpe)"

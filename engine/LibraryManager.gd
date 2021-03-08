@@ -1,4 +1,5 @@
 extends Node
+#For renaming entries and directories.
 
 var mode_bulk = 0
 

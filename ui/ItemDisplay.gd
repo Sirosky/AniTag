@@ -133,6 +133,7 @@ func display_refresh():
 			global.children_delete(FilesVBox)
 			var search = file_search.search_regex_full_path(global.filter_vid_regex, global.db[global.db_key_v]["path"], 0) #Make sure this dir actually has videos
 			
+			
 			for i in search.keys():
 				var temp=but_file.instance()
 				FilesVBox.add_child(temp) #load button into the right container

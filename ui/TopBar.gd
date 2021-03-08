@@ -6,6 +6,7 @@ onready var ButLoad = get_node("TopBarHBox/ButLoad")
 onready var ButBuild = get_node("TopBarHBox/ButBuild")
 onready var ButRefresh = get_node("TopBarHBox/ButRefresh")
 onready var ButRandom = get_node("TopBarHBox/ButRandom")
+onready var ButList = get_node("TopBarHBox/ButList")
 onready var ButBulkThumb = get_node("TopBarHBox/ButBulkThumb")
 onready var ButBulkUpdate = get_node("TopBarHBox/ButBulkUpdate")
 onready var ButMore = get_node("TopBarHBox/ButMore")
@@ -45,6 +46,9 @@ func _ready():
 	
 	ButRandom.connect("pressed",self,"_on_ButRandom_pressed")
 	ButRandom.hint_tooltip = "Randomize"
+	
+	ButList.connect("pressed",self,"_on_ButList_pressed")
+	ButList.hint_tooltip = "Update AniDB List"
 	
 	ButBulkThumb.connect("pressed",self,"_on_ButBulkThumb_pressed")
 	ButBulkThumb.hint_tooltip = "Bulk generate thumbnails"
@@ -121,6 +125,9 @@ func _on_ButFilter_pressed():
 	Popups.visible = 1
 	PopTag.visible = 1
 	PopTag.top_refresh()
+	
+func _on_ButList_pressed():
+	LibUpdater.anidb_list_update()
 	
 func _on_ButBulkThumb_pressed():
 	LibThumb.thumbs_generate_bulk()

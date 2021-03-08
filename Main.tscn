@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://ui/themes/default/bg.png" type="Texture" id=2]
@@ -53,6 +53,7 @@
 [ext_resource path="res://ui/themes/default/icons/settings.png" type="Texture" id=51]
 [ext_resource path="res://ui/GrpRenameDirectories.tres" type="ButtonGroup" id=52]
 [ext_resource path="res://ui/GrpRenameEntries.tres" type="ButtonGroup" id=53]
+[ext_resource path="res://icon.png" type="Texture" id=54]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.0235294, 0.14902, 0.541176 )
@@ -155,24 +156,30 @@ margin_left = 120.0
 margin_right = 156.0
 icon = ExtResource( 11 )
 
-[node name="ButBulkThumb" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+[node name="ButList" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
 margin_left = 160.0
-margin_right = 196.0
+margin_right = 192.0
+icon = ExtResource( 54 )
+expand_icon = true
+
+[node name="ButBulkThumb" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
+margin_left = 196.0
+margin_right = 232.0
 icon = ExtResource( 12 )
 
 [node name="ButBulkUpdate" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_right = 236.0
+margin_left = 236.0
+margin_right = 272.0
 icon = ExtResource( 13 )
 
 [node name="ButMore" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_right = 276.0
+margin_left = 276.0
+margin_right = 312.0
 icon = ExtResource( 48 )
 
 [node name="ButSettings" parent="HBoxContainer/Panel/LeftDisplay/TopBar/TopBarHBox" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_right = 316.0
+margin_left = 316.0
+margin_right = 352.0
 icon = ExtResource( 51 )
 
 [node name="HBoxFilter" type="HBoxContainer" parent="HBoxContainer/Panel/LeftDisplay"]
@@ -1251,8 +1258,8 @@ window_title = "Open a Directory"
 mode = 2
 access = 2
 show_hidden_files = true
-current_dir = "D:/Sirosky/Drive/OneDrive/Godot/AniTag"
-current_path = "D:/Sirosky/Drive/OneDrive/Godot/AniTag/"
+current_dir = "/Sirosky/OneDrive/Godot/AniTag"
+current_path = "/Sirosky/OneDrive/Godot/AniTag/"
 script = ExtResource( 30 )
 
 [node name="Messenger" type="Node" parent="."]
