@@ -53,7 +53,7 @@ func thumbs_generate_bulk():
 			thumbs_keys = global.db_missing_thumb
 	
 	if thumbs_generating_bulk == 0: #Initiate generation
-		print(thumbs_keys)
+#		print(thumbs_keys)
 		thumbs_generating_bulk = 1
 		bulk_index = 0
 		global.db_cur_key = thumbs_keys[bulk_index-1]
@@ -72,12 +72,29 @@ func thumbs_generate_bulk():
 	else: #Continue generation
 		
 		if bulk_index < thumbs_keys.size() - 1:
+				
 			bulk_index += 1
 			global.db_cur_key = thumbs_keys[bulk_index-1]
 			print(global.db_cur_key)
 			global.load_status = str("Now processing: "+str(global.db[global.db_cur_key]["name"]))
 			thumbs_generate()
 		else:
+			#Update entries for missing thumbs
+			var new_db = []
+			for i in global.db_missing_thumb:
+				var ani_id = global.db[i]["id"]
+				var entry
+				if int(ani_id) >= 0:
+					entry = str("user://db/anidb/"+str(ani_id)+"/"+"thumb"+str("1")+".jpg")
+				else:
+					entry = str("user://db/anidb/"+str(i)+"/"+"thumb"+str("1")+".jpg")
+				var file_temp = File.new()
+				if file_temp.file_exists(entry) == false:
+					new_db.append(i)
+			
+			print(new_db)
+			global.db_missing_thumb = new_db
+			
 			print("Job complete.")
 			global.Mes.message_send("Bulk thumbnail generation complete.")
 			thumbs_refresh()
@@ -90,6 +107,14 @@ func thumbs_generate_bulk():
 func thumbs_generate():
 	var ani_id = int(global.db[global.db_cur_key]["id"])
 	output_path = ProjectSettings.globalize_path("user://db/anidb/"+str(ani_id)+"/")
+	#For shows without anidb IDs
+	if ani_id < 0:
+		var file_temp = File.new() #Verify file rename succeeded
+		var dir_temp = Directory.new()
+	
+		if !file_temp.file_exists("user://db/anidb/"+str(global.db_cur_key)+"/"+str(ani_id)):
+			dir_temp.make_dir("user://db/anidb/"+str(global.db_cur_key)) #make new directory if current one doesn't exist for ani_id
+		output_path = ProjectSettings.globalize_path("user://db/anidb/"+str(global.db_cur_key)+"/")
 	
 	var search = file_search.search_regex(global.filter_vid_regex, global.db[global.db_cur_key]["path"], 0)
 	
@@ -103,20 +128,20 @@ func thumbs_generate():
 	var tar_path = search.keys()[0] #Get first path
 	thumbs_count = 0
 	
-	if ani_id > 0:
-		OS.execute(ffmepg_path, ["-i",tar_path,"-vf","fps=1/150",str(output_path+"thumb%d.jpg"),"-hide_banner"], 0)
-		thumbs_generating = 1
-		thumbs_timer = thumbs_delay_default
-		thumbs_check = 1
-		LoadPanel.visible = 1
-		LoadStatus.visible = 1
-		Popups.visible = 1
-		global.load_status = "Loading"
-	elif thumbs_generating_bulk == 1: #Skip anime we don't have anidb IDs for
-		thumbs_generating = 0
-		bulk_timer = bulk_timer_delay
-		bulk_continue = 1
-		print("ID not found, skipping")
+#	if ani_id > 0:
+	OS.execute(ffmepg_path, ["-i",tar_path,"-vf","fps=1/150",str(output_path+"thumb%d.jpg"),"-hide_banner"], 0)
+	thumbs_generating = 1
+	thumbs_timer = thumbs_delay_default
+	thumbs_check = 1
+	LoadPanel.visible = 1
+	LoadStatus.visible = 1
+	Popups.visible = 1
+	global.load_status = "Loading"
+#	elif thumbs_generating_bulk == 1: #Skip anime we don't have anidb IDs for
+#		thumbs_generating = 0
+#		bulk_timer = bulk_timer_delay
+#		bulk_continue = 1
+#		print("ID not found, skipping")
 		
 func _process(delta):
 	if thumbs_generating == 1 and thumbs_timer == 0: #If FFMPEG is generating thumbnails
@@ -211,8 +236,15 @@ func _process(delta):
 		
 
 func thumbs_refresh(): #Begins the refreshing job
-	var ani_id = str(global.db[global.db_key_v]["id"])
-	var search = file_search.search_regex_full_path("thumb", str("user://db/anidb/"+ani_id), 0)
+	var ani_id = global.db[global.db_key_v]["id"]
+	var search
+	
+	if int(ani_id) >= 0:
+		search = file_search.search_regex_full_path("thumb", str("user://db/anidb/"+str(ani_id)), 0)
+	else: #shows without ID
+		search = file_search.search_regex_full_path("thumb", str("user://db/anidb/"+str(global.db_key_v)), 0)
+
+	
 	var import_array = [] #Array of .import files to be removed
 	var image_num = 0
 	if search.size()>0:
@@ -233,7 +265,11 @@ func thumbs_refresh(): #Begins the refreshing job
 		keys.sort()
 		var c = 1
 		while c < (keys.size()+1): #Using a while loop to sort images in order
-			var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str(c)+".jpg")
+			var entry
+			if int(ani_id) >= 0:
+				entry = str("user://db/anidb/"+str(ani_id)+"/"+"thumb"+str(c)+".jpg")
+			else:
+				entry = str("user://db/anidb/"+str(global.db_key_v)+"/"+"thumb"+str(c)+".jpg")
 			#print(entry)
 			if keys.has(entry):
 				thumbs_sorted.append(entry)

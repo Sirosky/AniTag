@@ -21,11 +21,13 @@ var ani_id_check = 0 #ID of the anime just extracted
 var timer = 0
 var forced_update = 0 #Force download update to show even if cache already exists
 
+
 var bulk_updating = 0
 var bulk_timer = 0
 var bulk_timer_default = 180
 var bulk_index: float = 0
 var bulk_continue = 0
+var bulk_update_mode = 1 #0 = generate for all entries; 1 = generate for only ones missing info 
 var t
 
 onready var HTTPR = $HTTPRequest
@@ -60,38 +62,55 @@ func _ready():
 	#anidb_access_image(2012, 237235)
 
 
-	
-
 func bulk_update():
-	var db_size: int = int(global.db.size())
-	print("db_size")
+	var id_keys = []
+	
+	match bulk_update_mode:
+		0:
+			id_keys = global.db.keys()
+		1:
+			id_keys = global.db_missing_id
+	
+	var db_size: int = int(id_keys.size())
 	print(db_size)
+	
 	if bulk_updating == 0: #Initiate generation
+		print(id_keys)
 		bulk_updating = 1
 		bulk_index = 0
-		global.db_cur_key = global.db.keys()[bulk_index-1]
+		global.db_cur_key = id_keys[bulk_index-1]
 		if global.db_cur_key == "_Settings": #Skip Settings
 			bulk_index += 1
-			global.db_cur_key = global.db.keys()[bulk_index-1]
+			global.db_cur_key = id_keys[bulk_index-1]
 		anidb_init(global.db_cur_key)
 		Popups.visible = 1
 		LoadPanel.visible = 1
 		LoadStatus.visible = 1
 	else: #Continue generation
-		if bulk_index<db_size:
+		if bulk_index < db_size:
 			
 			bulk_index += 1
-			global.db_cur_key = global.db.keys()[bulk_index-1]
+			global.db_cur_key = id_keys[bulk_index-1]
 			if global.db_cur_key == "_Settings": #Skip Settings
 				bulk_index += 1
 				bulk_update()
 				return
 			anidb_init(global.db_cur_key)
-			global.load_status = str(str(global.db[global.db_cur_key]["name"])+" ("+str(stepify((bulk_index/(db_size-1))*100, .1))+"%)")
+			global.load_status = str(str(global.db[global.db_cur_key]["name"])+" ("+str(stepify((bulk_index/(db_size))*100, .1))+"%)")
 			print(global.load_status)
 		else:
 			global.Mes.message_send("Bulk update complete.")
 			print("Job complete.")
+			
+			#Clean up missing ID database
+			var new_db = []
+			for i in global.db_missing_id:
+				if int(global.db[i]["id"]) == -1: #DB still missing
+					new_db.append(i)
+			
+			print(new_db)
+			global.db_missing_id = new_db
+			
 			LoadPanel.visible = 0
 			LoadStatus.visible = 0
 			Popups.visible = 0
@@ -554,33 +573,36 @@ func anidb_pass_db(ani_id, update_images):
 		var comp = 0
 		var st = global.db[global.db_cur_key]["anidb_description"]
 		
-		while comp == 0: #First search
-			var tar = st.findn("]")
-			#print(str("tar str location " + str(tar)))
+		if st != null: #Some anime XMLs don't have any description entry
 			
-			if tar > -1: #Found
-				st.erase(tar, 1)
-				#print("Deleted ]")
-			else: #Nothing found, end search
-				comp = 1
+			while comp == 0: #First search
+				var tar = st.findn("]")
+				#print(str("tar str location " + str(tar)))
 				
-		comp = 0
+				if tar > -1: #Found
+					st.erase(tar, 1)
+					#print("Deleted ]")
+				else: #Nothing found, end search
+					comp = 1
+					
+			comp = 0
+					
+			while comp == 0: #Second search
+				var tar = st.findn("http")
+				var tar2 = st.findn("[", tar)
+				var l = tar2 - tar
+				#print(tar)
+				#print(tar2)
+				#print(l)
 				
-		while comp == 0: #Second search
-			var tar = st.findn("http")
-			var tar2 = st.findn("[", tar)
-			var l = tar2 - tar
-			#print(tar)
-			#print(tar2)
-			#print(l)
-			
-			if tar > -1: #Found
-				st.erase(tar, l+1)
-				#print("Deleted http")
-			else: #Nothing found, end search
-				comp = 1
-		
-		global.db[global.db_cur_key]["anidb_description"] = st
+				if tar > -1: #Found
+					st.erase(tar, l+1)
+					#print("Deleted http")
+				else: #Nothing found, end search
+					comp = 1
+			global.db[global.db_cur_key]["anidb_description"] = st
+		else:
+			global.db[global.db_cur_key]["anidb_description"] = ""
 		
 		#Now parse related anime	
 		var related = parse_db_advanced(ani_id, '<relatedanime>', '</relatedanime>','(?<=<anime i)(.*)(?=nime>)', 1)

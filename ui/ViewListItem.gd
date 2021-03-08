@@ -58,7 +58,13 @@ func directory_refresh():
 				
 			#Check for missing thumbnail
 			var ani_id = str(global.db[temp.stored_str]["id"])
-			var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str("1")+".jpg")
+			var entry
+			
+			if int(ani_id) >= 0:
+				entry = str("user://db/anidb/"+str(ani_id)+"/"+"thumb1"+".jpg")
+			else:
+				entry = str("user://db/anidb/"+str(temp.stored_str)+"/"+"thumb1"+".jpg")
+			
 			var file_temp = File.new() #Verify file rename succeeded
 			if file_temp.file_exists(entry) == false:
 				global.db_missing_thumb.append(temp.stored_str)
