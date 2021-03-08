@@ -52,18 +52,32 @@ func directory_refresh():
 			temp.text = i #str(global.db[i]["name"]) #update text label
 			temp.hint_tooltip = i#str(global.db[i]["name"])
 			
-			#Check for errors
-			if global.settings["General"]["error"] == true:
-				if int(global.db[temp.stored_str]["id"]) == -1:
+			#Check for missing AniDB ID
+			if int(global.db[temp.stored_str]["id"]) == -1: 
+				global.db_missing_id.append(temp.stored_str)
+				
+			#Check for missing thumbnail
+			var ani_id = str(global.db[temp.stored_str]["id"])
+			var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str("1")+".jpg")
+			var file_temp = File.new() #Verify file rename succeeded
+			if file_temp.file_exists(entry) == false:
+				global.db_missing_thumb.append(temp.stored_str)
+				if global.settings["General"]["error"] == true:
 					temp.icon = ico_exclam
-					temp.hint_tooltip = "AniDB ID not assigned."
-				else:
-					var ani_id = str(global.db[temp.stored_str]["id"])
-					var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str("1")+".jpg")
-					var file_temp = File.new() #Verify file rename succeeded
-					if file_temp.file_exists(entry) == false:
-						temp.icon = ico_exclam
-						temp.hint_tooltip = "Missing thumbnail"
+					temp.hint_tooltip = "Missing thumbnail"
+			
+			#Check for directory errors
+			if global.settings["General"]["error"] == true:
+#				if int(global.db[temp.stored_str]["id"]) == -1:
+#					temp.icon = ico_exclam
+#					temp.hint_tooltip = "AniDB ID not assigned."
+#				else:
+#					var ani_id = str(global.db[temp.stored_str]["id"])
+#					var entry = str("user://db/anidb/"+ani_id+"/"+"thumb"+str("1")+".jpg")
+#					var file_temp = File.new() #Verify file rename succeeded
+#					if file_temp.file_exists(entry) == false:
+#						temp.icon = ico_exclam
+#						temp.hint_tooltip = "Missing thumbnail"
 				
 				var dir_temp = Directory.new()
 				if dir_temp.dir_exists(global.db[temp.stored_str]["path"]) == false:

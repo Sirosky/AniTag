@@ -696,7 +696,7 @@ func anidb_access_image(ani_id, image_id):
 	HTTPR.set_download_file("user://db/anidb/"+str(ani_id)+"/"+str(image_id)+".jpg")
 	HTTPR.request(download_link)
 	
-func anidb_list_update(): #Updates anime-list-master.xml
+func masterdb_update(): #Updates anime-list-master.xml
 	lib_update_stage = 100
 	
 	Popups.visible = 1

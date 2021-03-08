@@ -4,6 +4,7 @@ var file_search = FileSearch.new() #Launch file search class
 var thumbs_index = []
 var thumbs_generating = 0 #0- inactive; 1- active
 var thumbs_generating_bulk = 0 #0- inactive; 1- active
+var thumbs_generating_mode = 1 #0 = generate for all entries; 1 = generate for only ones missing thumbnails
 var ffmepg_path = ProjectSettings.globalize_path("res://dependencies/ffmpeg.exe")
 var output_path = ProjectSettings.globalize_path("user://db/anidb/")
 var thumbs_timer = 0 #Timer which figures out how long it takes to generate a thumb
@@ -43,15 +44,23 @@ func _ready():
 
 func thumbs_generate_bulk():
 	#print(thumbs_generating_bulk)
+	var thumbs_keys = []
+		
+	match thumbs_generating_mode: #Figure out which mode we're using
+		0:
+			thumbs_keys = global.db.keys()
+		1:
+			thumbs_keys = global.db_missing_thumb
 	
 	if thumbs_generating_bulk == 0: #Initiate generation
+		print(thumbs_keys)
 		thumbs_generating_bulk = 1
 		bulk_index = 0
-		global.db_cur_key = global.db.keys()[bulk_index-1]
+		global.db_cur_key = thumbs_keys[bulk_index-1]
 		
 		if global.db_cur_key == "_Settings":
 			bulk_index += 1
-			global.db_cur_key = global.db.keys()[bulk_index-1]
+			global.db_cur_key = thumbs_keys[bulk_index-1]
 			print(global.db_cur_key)
 			print(bulk_index)
 		
@@ -62,9 +71,9 @@ func thumbs_generate_bulk():
 		Popups.visible = 1
 	else: #Continue generation
 		
-		if bulk_index<global.db.size() - 1:
+		if bulk_index < thumbs_keys.size() - 1:
 			bulk_index += 1
-			global.db_cur_key = global.db.keys()[bulk_index-1]
+			global.db_cur_key = thumbs_keys[bulk_index-1]
 			print(global.db_cur_key)
 			global.load_status = str("Now processing: "+str(global.db[global.db_cur_key]["name"]))
 			thumbs_generate()
@@ -86,6 +95,9 @@ func thumbs_generate():
 	
 	if search.size()<1:
 		print("Video files missing.")
+		thumbs_generating = 0
+		bulk_timer = bulk_timer_delay
+		bulk_continue = 1
 		return
 	
 	var tar_path = search.keys()[0] #Get first path
@@ -126,10 +138,10 @@ func _process(delta):
 			thumbs_check = 0
 		
 		#global.load_status = "Generating thumbnail " + str(max(search_size, 1)) +"-" + str(thumbs_count)
-		global.load_status = "Generating thumbnail " + str(max(search_size, 1))
+		global.load_status = str(global.db[global.db_cur_key]["name"]) + " - " + str(max(search_size, 1))
 		
 		if search_size>0: #Images were generated
-			if search_size == 1 and thumbs_first_generated == 0: #Calculte how often we should check 
+			if search_size == 1 and thumbs_first_generated == 0: #Calculate how often we should check 
 				thumbs_delay = thumbs_delay_default*(checks_made+1)
 				thumbs_first_generated = 1
 				checks_made = 0	

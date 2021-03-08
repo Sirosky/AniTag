@@ -127,7 +127,7 @@ func _on_ButFilter_pressed():
 	PopTag.top_refresh()
 	
 func _on_ButList_pressed():
-	LibUpdater.anidb_list_update()
+	LibUpdater.masterdb_update()
 	
 func _on_ButBulkThumb_pressed():
 	LibThumb.thumbs_generate_bulk()

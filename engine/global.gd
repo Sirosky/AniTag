@@ -9,11 +9,13 @@ var screen_size = OS.get_screen_size()
 var ani_selected #String of show selected
 
 var db_path = "" #Holds path of the db
-var db = {} #Holds actual DB dictionary be loaded from JSON
+var db = {} #Holds actual DB dictionary be loaded from JSON; key = name
 var db_name = "temp.json" #Name of the DB,  used when creating, loading, and updating DBs
 var db_cur_key = "" #Current key in the DB that is being processed
 var db_key_v #Current key that is being viewed. Only changed when new show is selected.
 var db_tags_count = {} #Key = tag, value = number of times it shows up
+var db_missing_id = [] #Array of entries missing IDs
+var db_missing_thumb = [] #Array of entries missing thumbnails
 
 #Used for sorting
 var db_arr = [] #Holds an array of NAMES in alphabetical order
